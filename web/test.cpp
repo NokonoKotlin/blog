@@ -1,64 +1,84 @@
 #include<iostream>
 #include<vector>
 #include<deque>
+#include<queue>
+
+
+
 
 const long long INF = 1e18;
 using namespace std;
 
-long long X[20] , Y[20] , Z[20];
 
 
-long long max(long long a,long long b){
-    if(a>b)return a;else return b;
-}
+int N , M ;
 
-long long min(long long a,long long b){
-    if(a<b)return a;else return b;
-}
-
-long long abs(long long a, long long b){
-    return max(a,b) - min(a,b);
-}
-
-
-/*
-    i->jのdist
-*/
-long long dist(int i , int j){
-    return abs(X[j]-X[i])+abs(Y[j]-Y[i]) + max(0ll , Z[j]-Z[i]);
-}
+struct Edge{
+    long long first ,second ,third;
+    Edge(long long u ,long long c,long long k){
+        first = u;
+        second = c;third = k;
+    }
+};
 
 int main(){
-    int N ;
-    cin >> N ;
+    int X,Y;
+    cin >> N >> M >> X >> Y;
 
-    
+    vector<vector<Edge> > G(N+1);
 
-    for(int i = 0 ; i < N ; i++){
-        cin >> X[i] >> Y[i] >> Z[i];
-    } 
-
-    vector<vector<long long > > dp((1<<N) , vector<long long >(N,INF));
-
-    dp[0][0] = 0;
-    for( int S = 0 ; S < (1<<N) ; S++){
+    for(int i = 0 ; i< M ; i++){
+        long long c,k;
+        int u , v ;
+        cin >> u >> v >> c >> k;
+        G[u].push_back(Edge(v,c,k));
+        G[v].push_back(Edge(u,c,k));
         
-        for(int v = 0 ; v < N ; v++){
-            if((S&(1<<v))==0)continue;
+        
 
-            int S_ = S-(1<<v);
-            
-            for(int x = 0 ; x < N ; x++){
-                //xがS_に含まれてなくても,その場合dp[S_][x]=INFなので問題ない
-                dp[S][v] = min(dp[S][v] , dp[S_][x] + dist(x,v));  
-            }   
+    }
+
+    int st = X;
+
+    priority_queue<pair<long long , int > , vector<pair<long long , int > > , greater<pair<long long ,int> > > Q;
+    Q.push(make_pair(0,st));
+   
+    vector<long long > dist(N+1, INF);     
+    dist[st] = 0;
+    
+    while(Q.size()>0){
+        int now = Q.top().second;
+        long long now_dist = Q.top().first;
+        Q.pop();    
+        
+
+        if(dist[now] < now_dist)continue;
+
+
+
+        for(Edge next : G[now]){
+            if(now_dist%next.third == 0){//待たなくて良い
+                if(dist[next.first] > dist[now] + next.second){
+                    dist[next.first] = dist[now] + next.second;
+                    Q.push(make_pair(dist[next.first] , next.first));
+                }
+            }else{//待たないといけない
+                if(dist[next.first] > dist[now] + next.second + next.third*((now_dist + next.third-1)/next.third ) - now_dist){
+                    dist[next.first] = dist[now] + next.second+ next.third*((now_dist + next.third-1)/next.third ) - now_dist;
+                    Q.push(make_pair(dist[next.first] , next.first));
+                }
+            }
             
         }
 
+
     }
     
-    
-    cout << dp[(1<<N)-1][0] << endl;
+    if(dist[Y]>=INF){
+        cout <<-1 << endl;
+        return 0;
+    }
+    cout << dist[Y] << endl;
 
     return 0;
 }
