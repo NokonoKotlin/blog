@@ -2,6 +2,8 @@
 #include<vector>
 #include<deque>
 #include<queue>
+#include<algorithm>
+#include<map>
 
 
 
@@ -9,76 +11,129 @@
 const long long INF = 1e18;
 using namespace std;
 
-
-
-int N , M ;
-
-struct Edge{
-    long long first ,second ,third;
-    Edge(long long u ,long long c,long long k){
-        first = u;
-        second = c;third = k;
+class UnionFind{
+    vector<int> par;
+    vector<int> rank;
+    int Size;
+    public:
+    UnionFind(int Size_){
+        Size = Size_+10;
+        vector<int>(Size).swap(par);
+        vector<int>(Size,1).swap(rank);
+        for(int i = 0 ; i < Size ; i++){
+            par[i] = i;
+        }
     }
+
+    int root(int x){
+        if(par[x] == x){
+            return x;
+        }else{
+            return root(par[x]);
+        }
+    }
+
+
+    void unite(int a, int b){
+        if(root(a) == root(b))return;
+        int ra = root(a);
+        int rb = root(b);
+        if(rank[ra] > rank[rb]){
+            par[rb] = ra;
+        }else if(rank[rb] > rank[ra]){
+            par[ra] = rb;
+        }else{
+            par[ra] = rb;
+            rank[rb]++;
+        }
+    }
+
+    bool same(int a, int b){
+        return root(a) == root(b);
+    }
+
 };
 
+
+
+int N , M ,Q;
+
+struct edge{
+    public:
+    long long  u , v , weight , index;
+
+    edge(){}
+    
+    edge(long long a , long long b , long long c ,long long d){
+        u = a ;
+        v = b;
+        weight = c;
+        index = d;
+    }
+
+};
+
+
+bool sort_compare(edge a, edge b){
+    return a.weight < b.weight;
+}
+
 int main(){
-    int X,Y;
-    cin >> N >> M >> X >> Y;
+    cin >> N >> M >> Q;
 
-    vector<vector<Edge> > G(N+1);
 
-    for(int i = 0 ; i< M ; i++){
-        long long c,k;
-        int u , v ;
-        cin >> u >> v >> c >> k;
-        G[u].push_back(Edge(v,c,k));
-        G[v].push_back(Edge(u,c,k));
-        
-        
 
+
+    vector<edge> E(M+Q);
+
+    //edge.index は、何番目のクエリの辺か(0なら元々グラフにある辺　、x(>=1)ならx番目のクエリの辺)
+    //辺を重みが小さい順に順に見ているとする。
+    //辺eを見ている時、kruskal法に基づいて採用する場合、eが元々グラフ上にあった辺なら頂点同士を連結する。
+    //eがクエリ由来の辺なら、ans[e.index]="Yes"として、辺eは使わない(これ以降に見る元のグラフ由来の辺の採用に影響するから)。
+
+
+    for(int i = 0 ; i<M;i++){
+        long long a , b , c;
+        cin >> a >> b >> c;
+        E[i] = edge(a,b,c,0);
     }
 
-    int st = X;
-
-    priority_queue<pair<long long , int > , vector<pair<long long , int > > , greater<pair<long long ,int> > > Q;
-    Q.push(make_pair(0,st));
-   
-    vector<long long > dist(N+1, INF);     
-    dist[st] = 0;
-    
-    while(Q.size()>0){
-        int now = Q.top().second;
-        long long now_dist = Q.top().first;
-        Q.pop();    
+    for(int i = 0 ; i < Q ; i++){
+        long long a , b , c;
+        cin >> a >> b >> c;
+        E[M+i] = edge(a,b,c,i+1);
+ 
         
+        
+    }
 
-        if(dist[now] < now_dist)continue;
+    //重みが小さい順にソート
+    sort(E.begin(),E.end(),sort_compare);
 
+    UnionFind T(N);
 
+    vector<string> ans(Q,"No");
 
-        for(Edge next : G[now]){
-            if(now_dist%next.third == 0){//待たなくて良い
-                if(dist[next.first] > dist[now] + next.second){
-                    dist[next.first] = dist[now] + next.second;
-                    Q.push(make_pair(dist[next.first] , next.first));
-                }
-            }else{//待たないといけない
-                if(dist[next.first] > dist[now] + next.second + next.third*((now_dist + next.third-1)/next.third ) - now_dist){
-                    dist[next.first] = dist[now] + next.second+ next.third*((now_dist + next.third-1)/next.third ) - now_dist;
-                    Q.push(make_pair(dist[next.first] , next.first));
-                }
+    for(edge e:E){   
+        //前から見ていく
+
+        //非連結成分同士を繋ぐ辺の場合
+        if(T.same(e.u,e.v) == 0){
+             
+           
+            if(e.index == 0){ 
+                //元々存在する辺の場合、連結する。
+                T.unite(e.u,e.v);
+            }else{
+                //後から追加する辺の場合、判定だけして連結はしない
+                ans[e.index-1] = "Yes" ;
             }
-            
         }
+    }
+
+    for(string s:ans)cout << s << endl;
 
 
-    }
-    
-    if(dist[Y]>=INF){
-        cout <<-1 << endl;
-        return 0;
-    }
-    cout << dist[Y] << endl;
 
     return 0;
 }
