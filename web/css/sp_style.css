@@ -153,7 +153,7 @@ h_small{
 
 /*
 	項目一覧...項目名は簡潔に
-	スマホ版は横並びに
+
 */
 .Index_index{
 	color: black;
@@ -193,7 +193,7 @@ h_small{
 	
 	padding: 0 6% 0 12%;
 	color: #38393a;
-	font-size: 7px;
+	font-size: 10px;
 	text-align: left;
 	text-decoration: none;
 	position: relative;
