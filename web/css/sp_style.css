@@ -131,7 +131,7 @@ h_small{
 	スマホ版は何もつけない
 */
 .Horizon{
-	
+	display: flex;
 }
 
 
@@ -158,7 +158,7 @@ h_small{
 .Index_index{
 	color: black;
 	width:25%;
-	display: flex;
+
 		
 }
 
@@ -193,7 +193,7 @@ h_small{
 	
 	padding: 0 6% 0 12%;
 	color: #38393a;
-	font-size: 16px;
+	font-size: 7px;
 	text-align: left;
 	text-decoration: none;
 	position: relative;
