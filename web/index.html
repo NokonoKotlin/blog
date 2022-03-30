@@ -17,9 +17,14 @@
     <body>
 
          <!--軽くコメント-->
-        <nav id="INNER">
+        <div id="Inner">
 
-            <section class = "INTRODUCTION">
+
+
+
+            <!--====================================================紹介文======================================================-->
+
+            <section class = "Introduction">
                 
                 <h_big>   
                     色不変日記<br></h_big>
@@ -27,28 +32,89 @@
                 <h_middle>
                     色が変わらない人の学習日記<br></h_middle>
                 
-                    
+
+            
+                <section style="text-align:right;">
+                    お問い合わせはこちら->
+                    <a href ="https://twitter.com/NokonoKotlin?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" >Twitter</a> 
+                     , <a href ="https://atcoder.jp/users/NokonoKotlin">AtCoder</a>
+                </section>
+
+
 
             </section>
-            
-            <section class = "INFO">
-                お問い合わせはこちら->
-                <a href ="https://twitter.com/NokonoKotlin?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" >twitter</a>
+
+
+
+
+            <br>
+
+
+
+            <!--====================================================ボタンを配置======================================================-->
+
+            <!--要素を横並び(左は項目(選択すると中身が開く)、右は中身)-->
+            <section class = "Horizon" id = "Contents">
                 <br>
-                私の<a href ="https://atcoder.jp/users/NokonoKotlin">AtCoder</a>アカウント
-            </section>
+
+                <!--左側の項目一覧(横幅は30%ぐらい)-->
+                <div class = "Index_index">
+
+                    <!--cssは"button_index"で,nameと同じIDの記事と対応している ,このボタンのidはあまり使わない,nameが大事-->
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "アルゴリズム基礎" name = "Algorithm_basic_article" id = "Algorithm_basic_button">
+
+                    
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "アルゴリズム典型" name = "Algorithm_nomal_article" id = "Algorithm_nomal_button">
+
+                    
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "アルゴリズム発展" name = "Algorithm_hard_article" id = "Algorithm_hard_button">
+
+                    
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "データ構造" name = "DataStructure_article" id = "DataStructure_button">
+
+                    
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "雑な日記" name = "MyDiary_article" id = "MyDiary_button">
+
+
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "脳トレ" name = "BrainTraining_article" id = " BrainTraining_button">
+
+
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "技術ブログ" name = "IT_blog_article" id = "IT_blog_button">
+
+
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "成果物" name = "MyProject_article" id = "MyProject_button">
+
+
+                </div>
 
 
 
-            <section class = "INDEX">
-                <!--  競プロ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 
-                <h_middle>
-                アルゴリズム , 競プロ <br></h_middle>
-            
-                <section class="BOX">
-                    基礎的なもの<br>
-                    <section class="BOX">
+
+            <!--====================================================記事の中身を表示======================================================-->
+
+
+
+
+
+                <div class = "article_index">
+                    
+                    
+                    <!--アルゴ基礎======================================================-->
+                    <div id = "Algorithm_basic_article" style = "display: block ; ">
+
+                        <h_big style = "color: red;">アルゴリズム基礎</h_big>
+                        <br>
+                        <br>
+
                         <h_middle>
                             <a  href = ./pages_kyopuro/kiso/zentansaku.html>全探索</a></h_middle>
                         <br>
@@ -66,92 +132,157 @@
                         <h_middle>
                             <a  href = ./pages_kyopuro/kiso/TreeDP_1.html>木DP(easy)</a></h_middle>
                         <br>
-
-                        
-
                         <h_middle>
                             <a  href = ./pages_kyopuro/kiso/dijkstra.html>ダイクストラ法</a></h_middle>
                         <br>
-
                         <h_middle>
                             <a  href = ./pages_kyopuro/kiso/kruskal.html>最小全域木(Kruskal)</a></h_middle>
                         <br>
 
-                    </section>
-                    <br>
 
-                    典型
-                    <section class ="BOX" >
+                    </div>
+
+
+
+                    
+                    <!--アルゴ典型======================================================-->
+                    <div id = "Algorithm_nomal_article" style = "display: none ; ">
+
+                        <h_big style = "color: red;">アルゴリズム典型</h_big>
+                        <br>
+                        <br>
 
                         <h_middle>
                             <a  href = ./pages_kyopuro/tenkei/BitDP.html>bitDP</a></h_middle>
                         <br>
 
-                    </section>
+                    </div>
 
 
-                    <br>
-                    Hard<br>
-                    <section class="BOX">
+
+                    
+                    <!--アルゴ発展======================================================-->
+                    <div id = "Algorithm_hard_article" style = "display: none ; ">
+
+                        <h_big style = "color: red;">現在まだ記事がありません。更新されるのをお持ちください。</h_big>
+
+                    </div>
+
+
+
+                    
+
+                    <!--データ構造======================================================-->
+                    <div id = "DataStructure_article" style = "display: none ; ">
+
+                        <h_big style = "color: red;">データ構造</h_big>
+
+                        <br>
+                        <br>
+
                         <h_middle>
-                            <a  href = ./pages_kyopuro/Hard/Splay-1.html>平衡二分探索木にチャレンジしました</a></h_middle>
+                            <a  href = ./pages_kyopuro/DataStructure/Splay-1.html>平衡二分探索木にチャレンジしました</a></h_middle>
                         <br>
                         <h_middle>
-                            <a  href = ./pages_kyopuro/Hard/Splay-2.html>更なる平衡二分探索木</a></h_middle>
+                            <a  href = ./pages_kyopuro/DataStructure/Splay-2.html>更なる平衡二分探索木</a></h_middle>
                         <br>
+                            
 
+                        <br>
+                        練習問題:
+                        <br>
+                        
                         <h_middle>
                             <a  href = ./pages_kyopuro/Hard/Problem_1.html>練習問題1</a></h_middle>
                         <br>
-                    </section>
 
-                    <br>
-
+                    </div>
 
 
-                </section>
+                    <!--脳トレ======================================================-->
+                    <div id = "BrainTraining_article" style = "display: none ; ">
+
+                        <h_big style = "color: red;">脳トレ</h_big>
+
+                        <br><br>
+
+                        <h_middle>
+                            <a href =./pages_nou_training/nou_training_kakezan_easy.html>掛け算(easy)</a>
+                        </h_middle>
+    
+                        <br>
+    
+                        <h_middle>
+                            <a href =./pages_nou_training/nou_training_QuickSentakuSort.html>クイック選択ソート</a>
+                        </h_middle>
+
+
+                    </div>
 
 
 
 
-                <br>
-                <br>
-                <!--  脳トレ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-                <h_middle>
-                    脳トレ<br>
-                </h_middle>
-                <section class="BOX">
+                    <!--雑な日記======================================================-->
+                    <div id = "MyDiary_article" style = "display: none ; ">
 
-                    <h_middle>
-                        <a href =./pages_nou_training/nou_training_kakezan_easy.html>掛け算(easy)</a>
-                    </h_middle>
+                        <h_big style = "color: red;">日記を雑に書いていきます</h_big>
+                        <br>
+                        <br>
 
-                    <br>
+                        <h_middle> 
+                            <a href= "./myDiary/day1.html" >Day1</a></h_middle>
 
-                    <h_middle>
-                        <a href =./pages_nou_training/nou_training_QuickSentakuSort.html>クイック選択ソート</a>
-                    </h_middle>
-                </section>
+                    </div>
 
 
-                <br><br>
+                    <!--技術ブログ======================================================-->
+                    <div id = "IT_blog_article" style = "display: none ; ">
 
-                <!-- study＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
-                <h_middle>
-                    お勉強
+                        <h_big style = "color: red;">私のお勉強記録</h_big>
+                        <br>
+                        <br>
+                        <h_middle>
+                            <a href =./study/javascript_HTML/animation_1.html>アニメーション１</a></h_middle>
+                        <br>
 
-                </h_middle>
-                <section class = "BOX">
-                    <h_middle>
-                        <a href =./study/javascript_HTML/animation_1.html>アニメーション１</a>
-                    </h_middle>
-                </section>
+                    </div>
 
+
+
+                    <!--成果物======================================================-->
+                    <div id = "MyProject_article" style = "display: none ; ">
+
+                        <h_big style = "color: red;">これから載せまーす</h_big>
+
+
+                    </div>
+
+
+
+                    
+
+
+
+                    <!--title======================================================-->
+                    <div id = "" style = "display: none ; ">
+
+                        <h_big style = "color: red;">title</h_big>
+
+                    </div>
+
+
+
+
+
+
+
+                </div>
+                
 
 
             </section>
 
-        </nav>
+        </div>
 
 
 
@@ -159,3 +290,53 @@
 
 
 </html>
+
+
+
+
+<!--============================================================================================================================-->
+<!--============================================================================================================================-->
+<!--===========================================ここからJavaScriptの記述だよ========================================================-->
+<!--============================================================================================================================-->
+<!--============================================================================================================================-->
+
+
+
+
+<script>
+    /*
+        変数や引数にHTML内で宣言されていないnameやidを入れないように注意
+    */
+
+
+    /*今選択されているボタンの名前 ... 宣言時は、最初に開かれてる記事の名前(id)を宣言*/
+    var NowSelectedButtonName = String("Algorithm_basic_article");
+
+
+    /*引数のeはeventで、ボタンのクリックから受け取る。*/
+    function OpenPage(e){
+        if(e.target.name == "empty")return false;
+
+        /*ボタンのnameが記事のidと対応してるので、そのidの記事を閉じたり開いたりする*/
+
+        /*今まで選ばれてたボタンに対応している記事を閉じる*/
+        ClosePage(NowSelectedButtonName);
+
+        /*新しく選択されたボタンに更新*/
+        NowSelectedButtonName = e.target.name;
+
+        console.log(NowSelectedButtonName)
+
+        /*新しい記事を開く*/
+        document.getElementById(NowSelectedButtonName).style.display = "block";
+        
+        return true;
+    }
+
+    /*引数のidは閉じるページ(div)のid*/
+    function ClosePage(id){
+        document.getElementById(id).style.display = "none";
+    }
+
+
+</script>

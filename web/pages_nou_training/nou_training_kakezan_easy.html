@@ -29,9 +29,9 @@
 
        
         <!--軽くコメント-->
-        <nav id="INNER">
+        <div id="Inner">
             <h_middle style = "text-align: left;"><a href="../index.html">前のページ</a> </h_middle>
-            <section class = "INTRODUCTION">
+            <section class = "Introduction">
                 
                 <h_big>   
                     掛け算トレーニング1<br></h_big>
@@ -40,7 +40,7 @@
             </section>
 
 
-            <section class = "EXPLANATION">
+            <section class = "Explanation">
                
                 
                 <h_middle>
@@ -61,7 +61,7 @@
                 
             </section>
 
-            <section class = "PROGRAM">
+            <section class = "SmallBox">
 
                 <h_big>
 
@@ -70,21 +70,21 @@
                         <center>始める時はNewQueryボタンを押してね！！</center>
                         <br>
    
-                        <center><input type="button" id = "NewQueryButton" value="NewQuery" onclick="NewQuery()" class = "NewQueryButton" style =" font-size: 25px; "></center>
+                        <center><input type="button" id = "NewQueryButton" value="NewQuery" onclick="NewQuery()"  style =" font-size: 25px; "></center>
                     </div>
 
                     <div id = "pagetype_1" style = "display:none;">
                         <center><div id = "Question"></div></center>
                         <br>
                         <!--この行長いです-->
-                        <center><input type="button" value="NO" onclick="select_NO()" class ="Select_NO" style = " font-size: 25px; "><input type="button" value="YES" onclick="select_YES()" class ="Select_YES" style =" font-size: 25px; "></center>
+                        <center><input type="button" value="NO" onclick="select_NO()" id ="Select_NO" style = " font-size: 25px; "><input type="button" value="YES" onclick="select_YES()" id ="Select_YES" style =" font-size: 25px; "></center>
                     </div>
 
                     <div id = "pagetype_2" style = "display:none;">
                         <center><div id ="result"></div></center>
                         <br>
                     
-                        <center><input type="button" id = "NewQueryButton" value="NewQuery" onclick="NewQuery()" class = "NewQueryButton" style = " font-size: 25px; "></center>
+                        <center><input type="button" id = "NewQueryButton" value="NewQuery" onclick="NewQuery()"  style = " font-size: 25px; "></center>
                     </div>
 
                 
@@ -202,17 +202,18 @@
 
 
                 </script>
+                <br>
 
-                <br>
-                <br>
-                <br>
-                <br>
             </section>
 
+            <br>
+            <br>
+            <br>
+            <br>
         
 
 
-        </nav>
+        </div>
 
 
 
