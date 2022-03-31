@@ -17,15 +17,15 @@
 
     <body>
 
-         <!--軽くコメント-->
-        <div id="Inner">
+         <!--軽くコメント ...-->
+        <div id="Inner" >
 
 
 
 
             <!--====================================================紹介文======================================================-->
 
-            <section class = "Introduction">
+            <section class = "Introduction_index">
                 
                 <h_big>   
                     色不変日記<br></h_big>
@@ -54,14 +54,19 @@
 
             <!--====================================================ボタンを配置======================================================-->
 
-            <!--要素を横並び(左は項目(選択すると中身が開く)、右は中身)-->
-            <section class = "Horizon" id = "Contents">
+            <!--要素を円形に並べる-->
+            <section class = "ButtonBox_index" id = "Buttons">
                 <br>
 
                 <!--左側の項目一覧(横幅は30%ぐらい)-->
                 <div class = "Index_index">
 
                     <!--cssは"button_index"で,nameと同じIDの記事と対応している ,このボタンのidはあまり使わない,nameが大事-->
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "データ構造" name = "DataStructure_article" id = "DataStructure_button"
+                        style = "left:51%;top:4%;">
+
+
                     <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
                         value = "アルゴリズム基礎" name = "Algorithm_basic_article" id = "Algorithm_basic_button">
 
@@ -72,10 +77,6 @@
                     
                     <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
                         value = "アルゴリズム発展" name = "Algorithm_hard_article" id = "Algorithm_hard_button">
-
-                    
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
-                        value = "データ構造" name = "DataStructure_article" id = "DataStructure_button">
 
                     
                     <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
@@ -94,6 +95,8 @@
                         value = "成果物" name = "MyProject_article" id = "MyProject_button">
 
 
+                    <!--cssは"button_index"で,nameと同じIDの記事と対応している ,このボタンのidはあまり使わない,nameが大事-->
+
                 </div>
 
 
@@ -105,14 +108,16 @@
 
 
 
+                <!--最初は隠しておく-->
+                <div class = "article_index" id = "Contents"  style="display:none;"> 
+                    
+                    <!--閉じるボタン-->
+                    <input value = "Close" onclick="ClosePage()" class ="close_button_index" id = "close_button">
 
-                <div class = "article_index">
-                    
-                    
                     <!--アルゴ基礎======================================================-->
-                    <div id = "Algorithm_basic_article" style = "display: block ; ">
+                    <div id = "Algorithm_basic_article" style = "display: none ; ">
 
-                        <h_big style = "color: red;">アルゴリズム基礎</h_big>
+                        <h_big style = "color:blue;">アルゴリズム基礎</h_big>
                         <br>
                         <br>
 
@@ -149,7 +154,7 @@
                     <!--アルゴ典型======================================================-->
                     <div id = "Algorithm_nomal_article" style = "display: none ; ">
 
-                        <h_big style = "color: red;">アルゴリズム典型</h_big>
+                        <h_big style = "color:blue;">アルゴリズム典型</h_big>
                         <br>
                         <br>
 
@@ -165,7 +170,7 @@
                     <!--アルゴ発展======================================================-->
                     <div id = "Algorithm_hard_article" style = "display: none ; ">
 
-                        <h_big style = "color: red;">現在まだ記事がありません。更新されるのをお持ちください。</h_big>
+                        <h_big style = "color:blue;">現在まだ記事がありません。更新されるのをお持ちください。</h_big>
 
                     </div>
 
@@ -176,7 +181,7 @@
                     <!--データ構造======================================================-->
                     <div id = "DataStructure_article" style = "display: none ; ">
 
-                        <h_big style = "color: red;">データ構造</h_big>
+                        <h_big style = "color:blue;">データ構造</h_big>
 
                         <br>
                         <br>
@@ -203,7 +208,7 @@
                     <!--脳トレ======================================================-->
                     <div id = "BrainTraining_article" style = "display: none ; ">
 
-                        <h_big style = "color: red;">脳トレ</h_big>
+                        <h_big style = "color:blue;">脳トレ</h_big>
 
                         <br><br>
 
@@ -226,7 +231,7 @@
                     <!--雑な日記======================================================-->
                     <div id = "MyDiary_article" style = "display: none ; ">
 
-                        <h_big style = "color: red;">日記を雑に書いていきます</h_big>
+                        <h_big style = "color:blue;">日記を雑に書いていきます</h_big>
                         <br>
                         <br>
 
@@ -239,7 +244,7 @@
                     <!--技術ブログ======================================================-->
                     <div id = "IT_blog_article" style = "display: none ; ">
 
-                        <h_big style = "color: red;">私のお勉強記録</h_big>
+                        <h_big style = "color:blue;">私のお勉強記録</h_big>
                         <br>
                         <br>
                         <h_middle>
@@ -253,7 +258,7 @@
                     <!--成果物======================================================-->
                     <div id = "MyProject_article" style = "display: none ; ">
 
-                        <h_big style = "color: red;">これから載せまーす</h_big>
+                        <h_big style = "color:blue;">これから載せまーす</h_big>
 
 
                     </div>
@@ -267,7 +272,7 @@
                     <!--title======================================================-->
                     <div id = "" style = "display: none ; ">
 
-                        <h_big style = "color: red;">title</h_big>
+                        <h_big style = "color:blue;">title</h_big>
 
                     </div>
 
@@ -304,40 +309,124 @@
 
 
 
-<script>
+<script>//記事の表示関連
     /*
         変数や引数にHTML内で宣言されていないnameやidを入れないように注意
     */
 
+    //  ボタンが何も選ばれていない場合のNowSelectedButtonの値
+    var NullString = String("");
 
-    /*今選択されているボタンの名前 ... 宣言時は、最初に開かれてる記事の名前(id)を宣言*/
-    var NowSelectedButtonName = String("Algorithm_basic_article");
+    /*  今選択されているボタンの名前 ... 初めは何も選択されてないので何も表示しない*/
+    var NowSelectedButtonName = NullString;
+
+
+    //  何かしらのボタンが選ばれてたら記事を表示
+    if(NowSelectedButtonName != NullString){
+        document.getElementById(NowSelectedButtonName).style.display = "block";
+    }
 
 
     /*引数のeはeventで、ボタンのクリックから受け取る。*/
     function OpenPage(e){
         if(e.target.name == "empty")return false;
 
-        /*ボタンのnameが記事のidと対応してるので、そのidの記事を閉じたり開いたりする*/
+        /*  ボタンのnameが記事のidと対応してるので、そのidの記事を閉じたり開いたりする*/
 
-        /*今まで選ばれてたボタンに対応している記事を閉じる*/
-        ClosePage(NowSelectedButtonName);
+        /*  (存在すれば)今まで選ばれてたボタンに対応している記事を閉じる*/
+        if(NowSelectedButtonName != NullString)ClosePage(NowSelectedButtonName);
 
-        /*新しく選択されたボタンに更新*/
+
+        /*  新しく選択されたボタンに更新*/
         NowSelectedButtonName = e.target.name;
 
-        console.log(NowSelectedButtonName)
+        //console.log(NowSelectedButtonName)
 
-        /*新しい記事を開く*/
+        /*
+            新しい記事を開く
+            必ず順番は(閉じる -> 開く)の順番
+        */
+        document.getElementById("Contents").style.display = "block";
+
         document.getElementById(NowSelectedButtonName).style.display = "block";
         
         return true;
     }
 
-    /*引数のidは閉じるページ(div)のid*/
-    function ClosePage(id){
+    /*  
+        記事を閉じて、記事を表示するWindowも閉じる
+        引数のidは閉じるページのid
+        idに何も入れなければ今見ている記事を閉じる
+    */
+    function ClosePage(id = NowSelectedButtonName){
+        if(id == NullString)return false;
+        
+        document.getElementById("Contents").style.display = "none";
         document.getElementById(id).style.display = "none";
+        NowSelectedButtonName = NullString;
+        return true;
     }
+
+
+</script>
+
+
+
+
+<script>
+
+    function SetButtons(){
+        //  ボタンの配置関連 .. 起動時にのみ発動する
+
+        //button_indexクラスの要素をlistにまとめる
+        var ButtonList = document.getElementsByClassName("button_index");
+        var button_num = ButtonList.length;
+        if(button_num <= 0)return false;
+
+        var degree = 360.0/button_num;
+        var red = (degree*Math.PI/180.0);
+        var WindowHeight = window.innerHeight;
+        var WindowWidth = window.innerWidth;
+        
+
+        var r = WindowWidth/3.14;
+        console.log(r)
+
+
+        for(var index = 0 ; index < button_num;index++){
+
+            /*画面サイズに合わせてサイズを変える*/
+            ButtonList[index].style.width = ""+WindowWidth/4.3+"px";
+            ButtonList[index].style.height = ""+WindowWidth/4.3+"px";
+
+
+
+
+            var X = Math.cos(red*index-red*2)*r+r;
+            var Y = Math.sin(red*index-red*2)*r+r;
+
+           
+            ButtonList[index].style.left = ""+X+"px";
+            ButtonList[index].style.top = ""+Y+"px";
+            console.log(index)
+            console.log(ButtonList[index].style.left);;
+            console.log(ButtonList[index].style.top);;
+        
+        }
+
+        return true;
+    }
+
+    SetButtons();
+    window.onresize = SetButtons;
+
+ 
+  
+
+
+
+
+
 
 
 </script>

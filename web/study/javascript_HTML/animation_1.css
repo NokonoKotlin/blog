@@ -1,4 +1,5 @@
 
+
 /*基本-------------------------------------------------------------------------------------------*/
 
 body,html {width: 100%;height: 100%;}
@@ -12,8 +13,16 @@ body {
 	font-family: "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro","ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	font-size: 12px;	/*サイズ*/
 	line-height: 2;		/*行間*/
-	background: rgb(138, 161, 140);
+
 	-webkit-text-size-adjust: none;
+
+
+	/*
+		背景色とグラデーション
+	*/
+	background: -moz-linear-gradient(left, #7bacc2, #FFF);
+	background: -webkit-linear-gradient(left, #7bacc2, #FFF);
+	background: linear-gradient(to right, #7bacc2, #FFF);
 }
 
 
@@ -63,26 +72,9 @@ h_small{
 
 
 
-/*index.html , query.html-------------------------------------------------------------------------------------------*/
-
-
-
-ALARM{
-	color: crimson;
-}
-
-
-
-.TOPIMAGE  { 
-	width: 90vw; 
-	margin-top: 150px;
-	margin-bottom: 60px;
-}
-.PIANO1 {width: 20vw;}
-
 
 /*------------------------------------------------------------------------------------------*/
-/*------------------------------------------------------------------------------------------*/
+/*----------------------------------{一般で使う}----------------------------------------------*/
 /*------------------------------------------------------------------------------------------*/
 
 
@@ -97,7 +89,7 @@ ALARM{
 }
 
 
-/*メインのクラスたち , <section>で指定*/
+/*トップやタイトル*/
 .Introduction{
 	background: rgb(253, 253, 253);	
 	color: black;
@@ -110,19 +102,11 @@ ALARM{
 }
 
 
-.Index {
-	color: black;
-	padding-top: 50px;
-	padding-bottom:  50px;
-	left: 0%;
-	right: 0%;
-	width: 95%;
-		
-	
 
 
-}
-
+/*
+	記事など、文章を書く用
+*/
 .Explanation{
 	background: rgb(253, 253, 253);	
 	margin-bottom: 40px;
@@ -132,12 +116,164 @@ ALARM{
 }
 
 
-
+/*
+	枠線付きのbox
+*/
 .Box{
 	border : 1px solid;
 	border-color: black;
 	padding: 20px;	
 
+}
+
+/*
+	小さいBox
+*/
+.SmallBox{
+	border : 2px solid;
+	border-color: black;
+}
+
+
+
+/*
+	この中の要素は横並び
+*/
+.Horizon{
+	display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------------------------------------*/
+/*----------------------------------{index.htmlで使う}---------------------------------------*/
+/*------------------------------------------------------------------------------------------*/
+
+
+
+/*トップやタイトル(index)用*/
+.Introduction_index{
+	background: rgb(114, 149, 177);	
+	color: rgb(215, 224, 226);
+	padding: 30px;		
+	border : 4px solid;
+	border-color: #a3a9ca;
+	text-align: center;
+	
+	
+}
+
+
+
+/*
+	ボタンを配置
+*/
+.ButtonBox_index{
+	position: relative;
+    margin: 0 auto;
+	width:100%px;
+	height: auto;
+}
+
+
+/*
+	項目一覧...項目名は簡潔に
+*/
+.Index_index{
+	color: black;
+	width:25%;
+		
+}
+
+/*
+	項目の中身
+*/
+.article_index{
+	background: rgb(253, 253, 253);	
+
+	padding: 30px;		
+
+	opacity: 0.85;
+
+	left:7%;
+	width:80%;
+
+	position: fixed;
+
+}
+
+
+/*
+	Indexの選択肢のボタン
+	ネットからコピペしたのを改変しました(正直者です)
+*/
+.button_index {
+	justify-content: center;
+	align-items: center;
+
+	background: rgb(219, 221, 224);
+	border: 3px solid rgb(102, 112, 168);
+	box-sizing: border-box;
+
+	width:200px;
+	height:200px;
+	border-radius: 100%;
+
+	
+	color:  rgb(102, 112, 168);
+	font-size: 20px;
+	text-align: center;
+	text-decoration: firebrick;
+
+	position: absolute;
+
+
+	transition-duration: 0.2s;
+
+}
+
+
+
+.button_index:hover {
+	background: rgb(104, 109, 160);
+	color: #fff;
+}
+
+/*
+	記事を閉じるボタン
+*/
+
+.close_button_index{
+	justify-content: center;
+	align-items: center;
+
+	background: rgb(233, 235, 226);
+	border: 1px solid black;
+	box-sizing: border-box;
+
+	width:60px;
+	height:35px;
+	
+
+	color: rgb(243, 94, 67);
+	font-size: 14px;
+	text-align: center;
+	text-decoration: none;
+	position: relative;
+	transition-duration: 0.2s;
+}
+
+
+.close_button_index:hover{
+	background:rgb(118, 87, 230);
+	color: white;
 }
 
 

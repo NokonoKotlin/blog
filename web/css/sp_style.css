@@ -12,8 +12,16 @@ body {
 	font-family: "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro","ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	font-size: 12px;	/*サイズ*/
 	line-height: 2;		/*行間*/
-	background: rgb(91, 109, 92);
+
 	-webkit-text-size-adjust: none;
+
+
+	/*
+		背景色とグラデーション
+	*/
+	background: -moz-linear-gradient(left, #7bacc2, #FFF);
+	background: -webkit-linear-gradient(left, #7bacc2, #FFF);
+	background: linear-gradient(to right, #7bacc2, #FFF);
 }
 
 
@@ -128,11 +136,12 @@ h_small{
 
 
 /*
-	スマホ版は何もつけない
+	この中の要素は横並び
 */
 .Horizon{
 	display: flex;
 }
+
 
 
 
@@ -148,17 +157,37 @@ h_small{
 
 
 
+/*トップやタイトル(index)用*/
+.Introduction_index{
+	background: rgb(114, 149, 177);	
+	color: rgb(215, 224, 226);
+	padding: 30px;		
+	border : 4px solid;
+	border-color: #a3a9ca;
+	text-align: center;
+	
+	
+}
 
 
 
 /*
-	項目一覧...項目名は簡潔に
+	ボタンを配置
+*/
+.ButtonBox_index{
+	position: relative;
+    margin: 0 auto;
+	width:100%px;
+	height: auto;
+}
 
+
+/*
+	項目一覧...項目名は簡潔に
 */
 .Index_index{
 	color: black;
 	width:25%;
-
 		
 }
 
@@ -167,10 +196,15 @@ h_small{
 */
 .article_index{
 	background: rgb(253, 253, 253);	
-	color: black;
+
 	padding: 30px;		
-	width:75%;
-	border: 2px black solid;
+
+	opacity: 0.85;
+
+	left:7%;
+	width:80%;
+
+	position: fixed;
 
 }
 
@@ -180,26 +214,64 @@ h_small{
 	ネットからコピペしたのを改変しました(正直者です)
 */
 .button_index {
-	display: flex;
 	justify-content: center;
 	align-items: center;
 
-	background: rgb(117, 106, 90);
+	background: rgb(219, 221, 224);
+	border: 3px solid rgb(102, 112, 168);
+	box-sizing: border-box;
+
+	width:200px;
+	height:200px;
+	border-radius: 100%;
+
+	
+	color:  rgb(102, 112, 168);
+	font-size: 15px;
+	text-align: center;
+	text-decoration: firebrick;
+
+	position: absolute;
+
+
+	transition-duration: 0.2s;
+
+}
+
+
+
+.button_index:hover {
+	background: rgb(104, 109, 160);
+	color: #fff;
+}
+
+/*
+	記事を閉じるボタン
+*/
+
+.close_button_index{
+	justify-content: center;
+	align-items: center;
+
+	background: rgb(233, 235, 226);
 	border: 1px solid black;
 	box-sizing: border-box;
 
-	width:100%;
-	height:60px;
+	width:60px;
+	height:35px;
 	
-	padding: 0 6% 0 12%;
-	color: #38393a;
-	font-size: 10px;
-	text-align: left;
+
+	color: rgb(243, 94, 67);
+	font-size: 14px;
+	text-align: center;
 	text-decoration: none;
 	position: relative;
 	transition-duration: 0.2s;
-
-}.button_index:hover {
-	background: rgb(83, 79, 70);
-	color: #fff;
 }
+
+
+.close_button_index:hover{
+	background:rgb(118, 87, 230);
+	color: white;
+}
+
