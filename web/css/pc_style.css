@@ -19,9 +19,50 @@ body {
 	/*
 		背景色とグラデーション
 	*/
-	background: -moz-linear-gradient(left, #7bacc2, #FFF);
-	background: -webkit-linear-gradient(left, #7bacc2, #FFF);
-	background: linear-gradient(to right, #7bacc2, #FFF);
+	background: -moz-linear-gradient(left, #7bacc2, rgb(222, 211, 219));
+	background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 211, 219));
+	background: linear-gradient(to right, #7bacc2, rgb(222, 207, 221));
+
+	animation: BackGroundAnimation 4s 0s infinite alternate linear;
+}
+
+
+@keyframes BackGroundAnimation {
+	0%{
+		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 211, 219));
+		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 211, 219));
+		background: linear-gradient(to right, #7bacc2, rgb(222, 207, 221));
+	}
+	
+	20%{
+		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 201, 209));
+		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 201, 209));
+		background: linear-gradient(to right, #7bacc2, rgb(222, 207, 201));
+	}
+
+	40%{
+		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 191, 199));
+		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 191, 199));
+		background: linear-gradient(to right, #7bacc2, rgb(222, 191, 199));
+	}
+
+	60%{
+		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 181, 189));
+		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 189, 189));
+		background: linear-gradient(to right, #7bacc2, rgb(222, 187, 181));
+	}
+
+	80%{
+		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 171, 179));
+		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 171, 179));
+		background: linear-gradient(to right, #7bacc2, rgb(222, 177, 171));
+	}
+
+	100%{
+		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 161, 169));
+		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 161, 169));
+		background: linear-gradient(to right, #7bacc2, rgb(222, 167, 161));
+	}
 }
 
 
@@ -201,6 +242,8 @@ h_small{
 
 	opacity: 0.85;
 
+	border-radius: 20px;
+
 	left:7%;
 	width:80%;
 
@@ -211,7 +254,8 @@ h_small{
 
 /*
 	Indexの選択肢のボタン
-	ネットからコピペしたのを改変しました(正直者です)
+	animation付き
+	サイズはhtml(javascript)側で指定
 */
 .button_index {
 	justify-content: center;
@@ -236,6 +280,8 @@ h_small{
 
 	transition-duration: 0.2s;
 
+	
+
 }
 
 
@@ -243,7 +289,61 @@ h_small{
 .button_index:hover {
 	background: rgb(104, 109, 160);
 	color: #fff;
+	animation: alternate;
 }
+
+
+
+
+/*
+	Aboutのボタン
+	サイズはjavascript内で調整
+*/
+.button_type2_index {
+	justify-content: center;
+	align-items: center;
+
+	/*
+		背景色とグラデーション
+	*/
+	background: -moz-linear-gradient(left, #e2e2bd, rgb(173, 173, 168));
+	background: -webkit-linear-gradient(left, #e2e2bd, rgb(173, 173, 168));
+	background: linear-gradient(to right, #e2e2bd, rgb(173, 173, 168));
+
+	border: 3px solid rgb(93, 108, 112);
+	box-sizing: border-box;
+
+	width:200px;
+	height:200px;
+	border-radius: 10px;
+
+	
+	color:  rgb(73, 87, 165);
+	font-size: 20px;
+	text-align: center;
+	text-decoration: firebrick;
+
+	position: absolute;
+
+
+	transition-duration: 0.2s;
+
+	
+
+}
+
+
+
+.button_type2_index:hover {
+	background: rgb(103, 104, 109);
+	color: #fff;
+	animation: alternate;
+}
+
+
+
+
+
 
 /*
 	記事を閉じるボタン
@@ -274,4 +374,3 @@ h_small{
 	background:rgb(118, 87, 230);
 	color: white;
 }
-
