@@ -23,7 +23,7 @@ body {
 	background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 211, 219));
 	background: linear-gradient(to right, #7bacc2, rgb(222, 207, 221));
 
-	animation: BackGroundAnimation 4s 0s infinite alternate linear;
+	animation: BackGroundAnimation 12s 0s infinite alternate linear;
 }
 
 
