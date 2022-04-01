@@ -144,6 +144,8 @@ h_small{
 
 
 
+
+
 /*
 	記事など、文章を書く用
 */
@@ -186,6 +188,23 @@ h_small{
 
 
 
+/*
+	ボタン
+*/
+
+.button_black{
+	color: black;
+	background-color: white;
+	font-size: 16px;
+	border: solid 3px gray;
+	
+}
+
+.button_black:hover{
+	color: black;
+	background-color: rgb(187, 184, 184);
+	
+}
 
 
 
@@ -244,10 +263,10 @@ h_small{
 
 	border-radius: 20px;
 
-	left:7%;
-	width:80%;
+	
+	width:90%;
 
-	position: fixed;
+	position: relative;
 
 }
 
@@ -256,13 +275,14 @@ h_small{
 	Indexの選択肢のボタン
 	animation付き
 	サイズはhtml(javascript)側で指定
+	ボタンの縁はjavascriptで変更する
 */
 .button_index {
 	justify-content: center;
 	align-items: center;
 
 	background: rgb(219, 221, 224);
-	border: 3px solid rgb(102, 112, 168);
+	border: 2px solid rgb(102, 112, 168);
 	box-sizing: border-box;
 
 	width:200px;
@@ -284,12 +304,9 @@ h_small{
 
 }
 
-
-
 .button_index:hover {
-	background: rgb(104, 109, 160);
-	color: #fff;
-	animation: alternate;
+
+	background-color: rgba(234, 235, 171, 0.692);
 }
 
 
@@ -323,7 +340,7 @@ h_small{
 	text-align: center;
 	text-decoration: firebrick;
 
-	position: absolute;
+	position: relative;
 
 
 	transition-duration: 0.2s;

@@ -244,6 +244,9 @@
 
                         <h_middle> 
                             <a href= "./myDiary/day1.html" >Day1</a></h_middle>
+                        <br>
+                        <h_middle>
+                            <a href= "./myDiary/day2.html" >Day2</a></h_middle>
 
                     </div>
 
@@ -290,6 +293,14 @@
                         <br>
                         <br>競プロやプログヤイングをやめてしまったとき、このページを見てそういえばそんなこともあったなと振り返れるように頑張って更新していきます。
                         <br>
+                        <br>これからの更新予定の激ムズアルゴ : 
+                        <br><br>&ensp;&ensp; -> FFT,NTT
+                        <br>&ensp;&ensp; -> KdTree
+                        <br>&ensp;&ensp; -> ConvexHullTrick
+                        <br>&ensp;&ensp; -> Persistent DataStructure
+                        <br>&ensp;&ensp; -> SegmentMap
+                        <br>&ensp;&ensp; -> Link-Cut Tree
+                        <br>&ensp;&ensp; -> 平方分割
 
                     </div>
 
@@ -456,12 +467,43 @@
     window.onresize = SetButtons;
 
  
-  
+
+
+
+</script>
 
 
 
 
+<script>//ボタンの点滅に関して
 
+    window.addEventListener('DOMContentLoaded', function(){
+
+        
+        var interval_id = null;
+
+        
+        var ButtonList = document.getElementsByClassName("button_index");
+        var button_num = ButtonList.length;
+
+
+        interval_id = setInterval(() => {
+
+            for(var index = 0 ; index < button_num;index++){
+                var rand = Math.floor(Math.random()*2);
+                console.log(rand);
+                if(rand == 1){
+                    ButtonList[index].style.border = "2px solid rgb(226, 168, 226)";
+                    ButtonList[index].style.color = "rgb(228, 81, 208)";
+                }else{
+                    ButtonList[index].style.border = "2px solid rgb(102, 112, 168)";
+                    ButtonList[index].style.color = "rgb(102, 112, 168)";
+                }
+            }
+
+        }, 1000);
+
+    });
 
 
 </script>

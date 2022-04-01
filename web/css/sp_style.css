@@ -244,10 +244,10 @@ h_small{
 
 	border-radius: 20px;
 
-	left:7%;
-	width:65%;
 
-	position: fixed;
+	width:85%;
+
+	position: relative;
 
 }
 
@@ -256,19 +256,21 @@ h_small{
 	Indexの選択肢のボタン
 	animation付き
 	サイズはhtml(javascript)側で指定
+	ボタンの縁はjavascriptで変更する
 */
 .button_index {
 	justify-content: center;
 	align-items: center;
 
 	background: rgb(219, 221, 224);
-	border: 1px solid rgb(102, 112, 168);
+	border: 2px solid rgb(102, 112, 168);
 	box-sizing: border-box;
 
 	width:200px;
 	height:200px;
 	border-radius: 100%;
 
+	
 	
 	color:  rgb(102, 112, 168);
 	font-size: 9px;
@@ -290,6 +292,8 @@ h_small{
 	background: rgb(104, 109, 160);
 	color: #fff;
 	animation: alternate;
+	border: 2px solid rgb(102, 112, 168);
+	color:  white;
 }
 
 
@@ -311,6 +315,7 @@ h_small{
 	background: linear-gradient(to right, #e2e2bd, rgb(173, 173, 168));
 
 	border: 2px solid rgb(93, 108, 112);
+	
 	box-sizing: border-box;
 
 	width:200px;
@@ -319,11 +324,11 @@ h_small{
 
 	
 	color:  rgb(73, 87, 165);
-	font-size: 9px;
+	font-size: 7px;
 	text-align: center;
 	text-decoration: firebrick;
 
-	position: absolute;
+	position: relative;
 
 
 	transition-duration: 0.2s;

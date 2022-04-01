@@ -50,7 +50,7 @@
                 セグメントツリーの本質は下図の通りです。
                 <br>
 
-                <image src = "./../../images/SegTreeEx1.png" style="width: 60%; "></image>
+                <image src = "./../../images/SegTreeEx1.png" style="width: 75%; "></image>
 
 
 
@@ -63,9 +63,142 @@
                 <br>実装は実装は完全二分木を作り、区間に対応する頂点を木の根(図では一番上)から探索していくものとなります。
 
                 <br>
-                以下、コード例(コードは書いたのですが、verifyのための問題を探している途中です。)
+                以下、コード例。verifyは<a href = "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B" >こちら</a>。
                 <br><br><br>
 
+
+                <code>
+                    <ol style="list-style:decimal-leading-zero outside;padding-left:36px;margin:0;background-color:#EEF;width:90%;line-height: 14px; color:#000;font-size:12px;">
+                    <li style="background-color:#EFF;"><font style="color:green;font-style:italic;">//include</font></li>
+                    <li style="background-color:#EEF;"><font style="color:green;font-style:italic;">//------------------------------------------</font></li>
+                    <li style="background-color:#EFF;">#include &lt;vector&gt;</li>
+                    <li style="background-color:#EEF;">#include&lt;iostream&gt;</li>
+                    <li style="background-color:#EFF;">#include&lt;math.h&gt;</li>
+                    <li style="background-color:#EEF;">#include&lt;map&gt;</li>
+                    <li style="background-color:#EFF;">using namespace std;</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">#define debug(x) cerr &lt;&lt; #x &lt;&lt; <font style="color:brown;">" = "</font> &lt;&lt; (x) &lt;&lt; <font style="color:brown;">" (L"</font> &lt;&lt; __LINE__ &lt;&lt; <font style="color:brown;">")"</font> &lt;&lt; <font style="color:brown;">" "</font> &lt;&lt; __FILE__ &lt;&lt; endl;</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;">template&lt;class T&gt;</li>
+                    <li style="background-color:#EEF;">class SegTree{</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;private:</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;T&gt; node;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;public:</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;int Size;<font style="color:green;font-style:italic;">//葉のサイズ</font></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;T initializer;<font style="color:green;font-style:italic;">//配列の初期値</font></li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;SegTree(){}</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;SegTree(int Size_ , T initializer_){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init(Size_,initializer_);</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;void init(int S , T I){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initializer = I;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int k = log2(S) + 2;</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;T&gt;((1&lt;&lt;k),initializer).swap(node);</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size = (1&lt;&lt;(k-1));<font style="color:green;font-style:italic;">//葉のサイズ</font></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:green;font-style:italic;">/*</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区間に対する演算 ... + , xor や maxなどができる</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;*/</font></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;T merge(T a, T b){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:green;font-style:italic;">//自分で指定..他にも変更すべき場所があるので注意</font></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return a+b;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:green;font-style:italic;">/*</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;葉から根に登りながら更新</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mergeの種類によって編集しないといけない</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;*/</font></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;void update(int index , T val){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(index &lt; 0 || index &gt;=Size)return;</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index += Size;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T prev = node[index];</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node[index] = val;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T dif = val - prev;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(index/2 &gt; 0){</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index/=2;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node[index] = merge(node[index*2] , node[index*2+1]);</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:green;font-style:italic;">/*</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[lef,rig)の半開区間について,木の頂点:SubRootが根となる部分木が覆う区間について調べる。</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;*/</font></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;T query(int lef , int rig , int SubRoot = 1 , int SubTreeLeft = 0 , int SubTreeRight = -1){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(SubRoot == 1)SubTreeRight = Size;</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(rig &lt;= SubTreeLeft){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:green;font-style:italic;">//区間が被っていない</font></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else if(lef &gt;=SubTreeRight){</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:green;font-style:italic;">//区間が被っていない</font></li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else if(  lef &lt;= SubTreeLeft &amp;&amp;  SubTreeRight &lt;= rig ){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:green;font-style:italic;">//SubRootを根とする部分木の範囲が、取得したい範囲に完全に含まれている-&gt; node[SubRoot]の値をreturn</font></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return node[SubRoot];</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:green;font-style:italic;">//SubRootの右の根と左の根に降りて、再度調べる</font></li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int border = (SubTreeLeft+SubTreeRight)/2;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return merge( query(lef,rig,SubRoot*2,SubTreeLeft,border) , query(lef,rig,SubRoot*2+1,border,SubTreeRight) );</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">};</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">int main(){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;long long n , q;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;cin &gt;&gt; n &gt;&gt; q;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;SegTree&lt;long long&gt; S(n,0);</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;while(q--){</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int c ;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long long x , y;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cin &gt;&gt; c &gt;&gt; x &gt;&gt; y;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(c==0){</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S.update(x,S.query(x,x+1)+y);</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; S.query(x,y+1) &lt;&lt; endl;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EFF;">&nbsp;</li>
+                    <li style="background-color:#EEF;">&nbsp;</li>
+                    <li style="background-color:#EFF;">&nbsp;</li>
+                    <li style="background-color:#EEF;">&nbsp;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;return 0;</li>
+                    <li style="background-color:#EEF;">}</li>
+                    <li style="background-color:#EFF;">&nbsp;</li>
+                    <li style="background-color:#EEF;">&nbsp;</li>
+                    <li style="background-color:#EFF;">&nbsp;</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"></li>
+                    </ol>
+                </code>
                 
             </section>
 

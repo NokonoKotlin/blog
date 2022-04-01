@@ -64,7 +64,7 @@
                 <section class="Box">
                     <!-- 解説パート ...　長い-->
                     <div id = "ProblemExplanation" style="display: none;">
-                        <center><input type="button"  id="Button_hide" onclick="HideButton()" style="font-size: 18px; border: 1px;" value = "解説を隠す"></center>
+                        <center><input type="button"  id="Button_hide" class = "button_black" onclick="HideButton()"  value = "解説を隠す"></center>
 
                             <br>
                             <br>
@@ -1847,7 +1847,7 @@
 
 
 
-                        <center><input type="button" id="Button_hide" onclick="HideButton()" style="font-size: 18px; border: 1px;" value = "解説を隠す"></center>
+                        <center><input type="button" id="Button_hide" class = "button_black" onclick="HideButton()" value = "解説を隠す"></center>
                     </div>
                     
 
@@ -1858,20 +1858,10 @@
 
 
                     <div id = "HideCheck" style="display: block;">
-                        <center><input type="button"  id="Button_appear" onclick="AppearButton()" style="font-size: 18px; border: 1px;" value = "解説を表示する"></center>
+                        <center><input type="button"  id="Button_appear" class = "button_black" onclick="AppearButton()"  value = "解説を表示する"></center>
                     </div>
 
-                    <script>
-                        function AppearButton(){
-                            document.getElementById("ProblemExplanation").style.display = "block";
-                            document.getElementById("HideCheck").style.display = "none";
-                        }
-
-                        function HideButton(){
-                            document.getElementById("ProblemExplanation").style.display = "none";
-                            document.getElementById("HideCheck").style.display = "block";
-                        }
-                    </script>
+                    
 
 
                 </section>
@@ -1892,3 +1882,24 @@
 
 
 </html>
+
+
+<!--javascript partです-->
+<!--javascript partです-->
+<!--javascript partです-->
+<!--javascript partです-->
+
+
+<script>
+
+
+    function AppearButton(){
+        document.getElementById("ProblemExplanation").style.display = "block";
+        document.getElementById("HideCheck").style.display = "none";
+    }
+
+    function HideButton(){
+        document.getElementById("ProblemExplanation").style.display = "none";
+        document.getElementById("HideCheck").style.display = "block";
+    }
+</script>
