@@ -50,7 +50,7 @@
 
                 <br>
 
-                <image src = "./../../images/chouhuku.png" style="width: 80%;"></image>
+                <img src = "./../../images/chouhuku.png" style="width: 80%;"> 
 
                 <br>
                 <br>
@@ -79,7 +79,7 @@
                 <br>練習問題1では変数 a,b,c を箱としてみなしていましたが、今回は変数 a,b,c を区別しないボールとして考えます。
                 <br>以下の図を見てください。
                 <br>
-                <image src = "./../../images/chouhuku2.png" style="width: 80%;"></image>
+                <img src = "./../../images/chouhuku2.png" style="width: 80%;"> 
                 <br>
                 <br>このように、変数の間の仕切り棒の本数を変数の差(の絶対値)として並べると綺麗に対応できています。
                 <br>
@@ -91,8 +91,81 @@
                 <br>整数の変数が出てくる問題は、重複組合せの問題として捉えることができることがある。
                 <br>
                 <br>
+                <br>ちなみに<a href = "https://atcoder.jp/contests/abc021/tasks/abc021_d">こちらの問題</a>は練習問題２を知っていると解けます。
+                <br>以下はコード例です(mod計算を使用しているので、mod計算のページも参照ください)。
                 <br>
                 <br>
+                <br>
+                <br>
+                <code>
+                    <ol style="list-style:decimal-leading-zero outside;padding-left:36px;margin:0;background-color:#EEF;width:90%;line-height: 14px;color:#000;font-size:12px;">
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"><font style="color:green;font-style:italic;">//include</font></li>
+                    <li style="background-color:#EFF;"><font style="color:green;font-style:italic;">//------------------------------------------</font></li>
+                    <li style="background-color:#EEF;">#include&lt;iostream&gt;</li>
+                    <li style="background-color:#EFF;">#include&lt;vector&gt;</li>
+                    <li style="background-color:#EEF;">#include&lt;queue&gt;</li>
+                    <li style="background-color:#EFF;">#include&lt;map&gt;</li>
+                    <li style="background-color:#EEF;">#include&lt;algorithm&gt;</li>
+                    <li style="background-color:#EFF;">using namespace std;</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;">const long long INF = 1e18;</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;">long long MOD = 1000000007;</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">long long modpow(long long a, long long b , long long m){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;int&gt; bit;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;for(int i = 0 ; i &lt;= 62;i++){</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(b&amp;(1ll&lt;&lt;i))bit.push_back(i);</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;long long&gt; power(63 , 0);</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;power[0] = (a%m+m)%m;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;for(int x = 1 ; x &lt;= 62 ; x++){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;power[x] = power[x-1]*power[x-1];</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;power[x] %=m;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;long long res = 1;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;for(int b : bit){</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;res *= power[b];</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;res%=m;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;return res;</li>
+                    <li style="background-color:#EFF;">}</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">long long modinv(long long x, long long m){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;x = (x%m+m)%m;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;return modpow(x,m-2,m);</li>
+                    <li style="background-color:#EFF;">}</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">long long moddiv(long long a , long long b , long long m){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;a = (a%m+m)%m;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;return (a*modinv(b,m))%m;</li>
+                    <li style="background-color:#EFF;">}</li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"></li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">int main(){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;long long n , k;cin &gt;&gt; n &gt;&gt; k;</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;long long ans = 1;</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;for(int N = n+k-1 ; N &gt; n-1 ; N--){</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ans *= moddiv(N,N-n+1,MOD);</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ans %=MOD;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;cout &lt;&lt; ans &lt;&lt; endl;</li>
+                    <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;return 0;</li>
+                    <li style="background-color:#EFF;">}   </li>
+                    </ol>
+                </code>
 
 
 

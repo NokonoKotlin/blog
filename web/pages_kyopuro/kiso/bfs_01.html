@@ -78,7 +78,7 @@
                 <br>その場合、通常のBFSでは最短距離の配列:distの更新は、Queueに頂点を追加するタイミングでも、Queueから頂点を取り出すタイミングでもどちらでもよかったのに対して,
                 01BFSでは必ず頂点をQueueから取り出すタイミングでdistを更新しないといけません。
                 <br>なぜならdistが-1で初期化されている場合、頂点vへの新たなpathが最短かどうかは、dist[v]が-1かどうかで判定するからです。
-                <br><image src = "./../../images/bfs_01_ng.png" style="width: 80%;"></image>
+                <br><img src = "./../../images/bfs_01_ng.png" style="width: 80%;"> 
 
                 <br>
                 <br>例えば図のようなグラフの場合、始点をstとすると、辺(st->gl)を調べた際、dist[gl]は始め-1なので dist[gl] = 1と更新することになります。

@@ -1,122 +1,64 @@
-
 //include
 //------------------------------------------
 #include<iostream>
 #include<vector>
 #include<queue>
 #include<map>
-#include<algorithm>
 using namespace std;
-
 const long long INF = 1e18;
-
-
-
-
-int main(){ 
-
-    queue<int> q;
-
-    int n ;cin >> n ;
-    vector<int> B(n),W(n);
-    for(int i = 0; i < n ; i++)cin >>W[i];
-    for(int i = 0; i < n ; i++)cin >>B[i];
-
-
-
-    vector<vector<int> > G(150000);//Grundy数の状態遷移グラフ
-    vector<int> indegree(150000,0);
-    
-
-    //十分大きく取る
-    int identifer = 2600;//グリッドグラフを１次元で表現するとき、１次元目と２次元目の境目を用意する( 二次元の点(X、Y) <=> X*identifer + Y ) 
-
-
-    
-    for(int x = 0; x< 150000 ; x++){
-        int X = x/identifer;
-        int Y = x%identifer;
-        if(X>=1){
-            if(Y+X<identifer){
-                G[x].push_back((X-1)*identifer + Y+X);
-                indegree[(X-1)*identifer + Y+X]++;
-
-                
-            }
-        }
+int main(){
+    priority_queue<int , vector<int> , greater<int> > pq;
+    int n , m ;cin >> n >> m;
+    vector<vector<int> > G(n);
+    vector<int> indegree(n,0);
+    vector<map<int , int> > is_used(n);
+    for(int i = 0 ; i < m ; i++){
+        int a, b;cin >> a >> b;
+        a--;//0-indexに直してる
+        b--;
+        if(is_used[b][a] != 0)continue;
+        G[a].push_back(b);
+        indegree[b]++;//入ってくる辺の本数
+        is_used[b][a] = 1;
     }
-
-
-    for(int x = 0; x< 150000 ; x++){
-        int X = x/identifer;
-        int Y = x%identifer;
-        if(Y>=2){
-            int M = Y/2;
-            for(int k = 1 ; k<=M ; k++){
-                G[x].push_back(X*identifer + Y-k);
-                indegree[X*identifer + Y-k]++;
-            }
-        }
-    }
-
-
-
-
-    
-    
-
-
-    for(int x = 0; x < 150000 ; x++){
+    vector<int> A(n);
+    size_t index_now = 0;
+    for(int x = 0; x < n ; x++){
         if(indegree[x]==0){
-            q.push(x);
+            pq.push(x);
         }
     }
-
-    vector<int> dfs;
-    while(q.empty()==false){
-        int x = q.front();
-        q.pop();
-
-        dfs.push_back(x);
-           
+    if(pq.empty()){
+        //初期段階でindegree = 0 の頂点が無いならば、ループが存在する(閉路がある)のでダメ。
+        cout << -1 << endl;
+        return 0;
+    }
+    while(pq.empty()==false){
+        int x = pq.top();
+        pq.pop();
+        A[index_now] = x;
+        index_now++;
         for(int next : G[x]){
-
+            if(indegree[next] == 0){
+                //閉路があったらダメ
+                cout << -1 << endl;
+                return 0;
+            }
             indegree[next]--;
             if(indegree[next] == 0){
-                q.push(next);
+                pq.push(next);
             }
         }
     }
-
-    vector<int> Grundy(150000 , -1);
-
-    for(int i = (int)dfs.size()-1 ; i >= 0 ; i--){
-        int now = dfs[i];
-        vector<int> memo;//遷移先のGrundy数を保管
-        for(int nx : G[now]){
-            memo.push_back(Grundy[nx]);
-        }
-        sort(memo.begin() , memo.end());
-        int mex = 0;
-        for(int x : memo){
-            if(mex == x)mex++;
-        }
-        Grundy[now] = mex;
+    if(index_now<n){
+        //Aに追加されていない頂点が残っている。(indegree >0 となる頂点があるかどうかでも判定可能)
+        cout << -1 << endl;
+        return 0;
     }
-
-    int judge = 0;
-    for(int i = 0 ; i < n ; i++){
-        judge ^= Grundy[W[i]*identifer + B[i]];
+    for(int x : A){
+        //1-indexに直しましょう
+        cout << x+1 << " ";
     }
-
-    if(judge){
-        cout << "First" << endl;
-    }else{
-        cout <<"Second" << endl;
-    }
-
-
-
-
+    cout << endl;
     return 0;
 }
