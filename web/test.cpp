@@ -4,61 +4,105 @@
 #include<vector>
 #include<queue>
 #include<map>
+#include<stack>
+#include<string>
 using namespace std;
 const long long INF = 1e18;
+
+
+long long MOD = 1000000007;
+long long modpow(long long a, long long b , long long m){
+    vector<int> bit;
+    
+    for(int i = 0 ; i <= 62;i++){
+        if(b&(1ll<<i))bit.push_back(i);
+    }
+    vector<long long> power(63 , 0);
+    power[0] = (a%m+m)%m;
+    for(int x = 1 ; x <= 62 ; x++){
+        power[x] = power[x-1]*power[x-1];
+        power[x] %=m;
+    }
+    long long res = 1;
+    for(int b : bit){
+        res *= power[b];
+        
+        res%=m;
+    }
+    return res;
+}
+long long modinv(long long x, long long m){
+    x = (x%m+m)%m;
+    return modpow(x,m-2,m);
+}
+long long moddiv(long long a , long long b , long long m){
+    a = (a%m+m)%m;
+    return (a*modinv(b,m))%m;
+}
+
+/*
+    O(k)アルゴリズム
+*/
+long long modcomb(long long n , long long k , long long M){
+    long long res = 1;
+    for(int N = n ; N > n-k ; N--){
+        res *= moddiv(N,k-n+N,M);
+        res %=M;
+    }
+    return res;
+}
+
+class ModComb{
+    private:
+    vector<long long> table;
+    int Max;
+    long long MOD;
+    public:
+    
+    ModComb(long long MOD_ , int Max_ = 1000001){
+        Max = Max_;
+        MOD = MOD_;
+       
+        vector<long long>(Max , 1).swap(table); 
+        table[0] = 1;
+        for(int x = 1 ; x < Max ; x++){
+            table[x] = (table[x-1]*x)%MOD;
+        }
+    }
+
+    long long modcomb(int n , int k){
+        long long res = 1;
+        res*=table[n];
+        res %=MOD;
+        res = moddiv(res , table[n-k],MOD);
+        res = moddiv(res ,table[k],MOD); 
+        return res;
+    }
+   
+
+};
+
+
+
+
 int main(){
-    priority_queue<int , vector<int> , greater<int> > pq;
-    int n , m ;cin >> n >> m;
-    vector<vector<int> > G(n);
-    vector<int> indegree(n,0);
-    vector<map<int , int> > is_used(n);
-    for(int i = 0 ; i < m ; i++){
-        int a, b;cin >> a >> b;
-        a--;//0-indexに直してる
-        b--;
-        if(is_used[b][a] != 0)continue;
-        G[a].push_back(b);
-        indegree[b]++;//入ってくる辺の本数
-        is_used[b][a] = 1;
-    }
-    vector<int> A(n);
-    size_t index_now = 0;
-    for(int x = 0; x < n ; x++){
-        if(indegree[x]==0){
-            pq.push(x);
+    ModComb M(MOD);
+    while(true){
+        long long n ,k;
+        cout <<"input n & k ... if n is -1 , program will end" << endl; 
+        cin >> n;
+        if(n == -1)break;
+        cin >> k;
+        cout << "ModComb.modcomb(n,k) = ";
+        if(n>=1000000){
+            cout <<"large" << endl;
+        }else{
+            cout<<M.modcomb(n,k) << endl;
         }
+        cout << "modcomb(n,k,MOD) = ";
+        cout << modcomb(n,k,MOD) << endl;
+
+
     }
-    if(pq.empty()){
-        //初期段階でindegree = 0 の頂点が無いならば、ループが存在する(閉路がある)のでダメ。
-        cout << -1 << endl;
-        return 0;
-    }
-    while(pq.empty()==false){
-        int x = pq.top();
-        pq.pop();
-        A[index_now] = x;
-        index_now++;
-        for(int next : G[x]){
-            if(indegree[next] == 0){
-                //閉路があったらダメ
-                cout << -1 << endl;
-                return 0;
-            }
-            indegree[next]--;
-            if(indegree[next] == 0){
-                pq.push(next);
-            }
-        }
-    }
-    if(index_now<n){
-        //Aに追加されていない頂点が残っている。(indegree >0 となる頂点があるかどうかでも判定可能)
-        cout << -1 << endl;
-        return 0;
-    }
-    for(int x : A){
-        //1-indexに直しましょう
-        cout << x+1 << " ";
-    }
-    cout << endl;
-    return 0;
+    
 }
