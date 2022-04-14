@@ -14,6 +14,93 @@ const double PI = 3.141592653589793;
 
 
 
+
+/*
+    高速フーリエ変換:
+    fft(vector<double> a , bool f):=aをフーリエ変換したものを返す。bがtrueの時は逆変換.
+    convolve(vector<double> a , vector<double> b ):=aとbを畳み込んだ数数列cを返す
+    c をintとして扱う場合、誤差を消すために0.5を足してからintやll にキャストすると良い
+*/
+class FF{
+    public:
+    FF(){
+
+    }
+    ~FF(){
+
+    }
+
+
+    vector<complex<double> > fft(vector<complex<double>> a, bool inverse = false) {
+        int n = a.size();
+        int h = 0; // h = log_2(n)
+        for (int i = 0; 1 << i < n; i++) h++;
+        // バタフライ演算用の配置入れ替え
+        for (int i = 0; i < n; i++) {
+            int j = 0;
+            for (int k = 0; k < h; k++) j |= (i >> k & 1) << (h - 1 - k);
+            if (i < j) swap(a[i], a[j]);
+        }
+        // バタフライ演算
+        for (int b = 1; b < n; b *= 2) {
+            // 第 log_2(b) + 1 段
+            // ブロックサイズ = b * 2
+            for (int j = 0; j < b; j++) {
+                // ブロック内 j 個目
+                // 重み w = (1 の原始 2b 乗根の j 乗)
+                complex<double> w = polar(1.0, (2 * PI) / (2 * b) * j * (inverse ? 1 : -1));
+                for (int k = 0; k < n; k += b * 2) {
+                    // k を先頭とするブロック
+                    complex<double> s = a[j + k];         // 前
+                    complex<double> t = a[j + k + b] * w; // 後
+                    a[j + k] = s + t;                     // 前の更新
+                    a[j + k + b] = s - t;                 // 後の更新
+                }
+            }
+        }
+        // 逆変換時にサイズで割る調整
+        if (inverse)
+            for (int i = 0; i < n; i++) a[i] /= n;
+        return a;
+    }
+    // Cooley–Tukey FFT algorithm O(N log N)
+    vector<complex<double>> fft(vector<double> a, bool inverse = false) {
+        vector<complex<double>> a_complex(a.size());
+        for (int i = 0; i < a.size(); i++) a_complex[i] = complex<double>(a[i], 0);
+        return fft(a_complex, inverse);
+    }
+    
+    // FFT による畳み込み O(N log N)
+    vector<double> convolve(vector<double> a, vector<double> b) {
+        int s = a.size() + b.size() - 1; // 畳み込み結果のサイズ
+        int t = 1; // FFT に使う配列のサイズ（2 の累乗）
+        while (t < s) t *= 2;
+        a.resize(t); // FFT するためにリサイズ
+        b.resize(t); // FFT するためにリサイズ
+        vector<complex<double>> A = fft(a);
+        vector<complex<double>> B = fft(b);
+        for (int i = 0; i < t; i++) {
+            //畳み込みの演算はここに記述
+            A[i] *= B[i]; // 畳み込み結果の FFT 結果を得る
+        }
+        A = fft(A, true); // IFFT で畳み込み結果を得る
+        a.resize(s);      // 畳み込み結果を入れるためにリサイズ
+        for (int i = 0; i < s; i++) a[i] = A[i].real(); // 実部が答え
+        return a;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
 /*  
     aをフーリエ変換(逆変換)
     aのサイズは2の冪乗
@@ -149,19 +236,104 @@ vector<double> convolution(vector<double> a , vector<double> b ){
 }
 
 
+
+
+vector<int> sort_cyclic_shifts(string const& s) {
+    int n = s.size();
+    const int alphabet = 256;
+    vector<int> p(n), c(n), cnt(max(alphabet, n), 0);
+
+    //k=0のソート
+
+    for (int i = 0; i < n; i++){
+        cnt[s[i]]++;
+    }
+    for (int i = 1; i < alphabet; i++){
+        cnt[i] += cnt[i-1];
+    }
+    for (int i = 0; i < n; i++){
+        p[--cnt[s[i]]] = i;
+    }
+    c[p[0]] = 0;
+    int classes = 1;
+    for (int i = 1; i < n; i++) {
+        if (s[p[i]] != s[p[i-1]]){
+            classes++;
+        }
+        c[p[i]] = classes - 1;
+    }
+
+
+    //以下k=1…logn+1の反復をする
+    vector<int> pn(n), cn(n);
+    for (int k = 0; (1 << k) < n; ++k) {
+        for (int i = 0; i < n; i++) {
+            pn[i] = p[i] - (1 << k);
+            if (pn[i] < 0){
+                pn[i] += n;
+            }
+        }
+        fill(cnt.begin(), cnt.begin() + classes, 0);
+        for (int i = 0; i < n; i++){
+            cnt[c[pn[i]]]++;
+        }
+        for (int i = 1; i < classes; i++){
+            cnt[i] += cnt[i-1];
+        }
+        for (int i = n-1; i >= 0; i--){
+            p[--cnt[c[pn[i]]]] = pn[i];
+        }
+        cn[p[0]] = 0;
+        classes = 1;
+        for (int i = 1; i < n; i++) {
+            pair<int, int> cur = {c[p[i]], c[(p[i] + (1 << k)) % n]};
+            pair<int, int> prev = {c[p[i-1]], c[(p[i-1] + (1 << k)) % n]};
+            if (cur != prev){
+                ++classes;
+            }
+            cn[p[i]] = classes - 1;
+        }
+        c.swap(cn);
+    }
+    return p;
+}
+
+
+
+
+
+
+#include<random>
 int main(){
+    string s;
+    cin>> s;
+    vector<int> p = sort_cyclic_shifts(s);
+    while(1){
+        string t;
+        cin >> t;
+        if(t == "Q"){
+            break;
+        }
+        int lef = 0;
+        int rig = p.size();
+        
+        while(rig - lef > 1){
+            int mid = lef + (rig-lef)/2;
+            int st = p[mid];
+            bool fl = 1;
 
-    int n ;
-    cin >> n;
-    vector<double> a(n+1,0) , b(n+1,0);
-    for(int i = 0 ; i< n ; i++){
-        cin >> a[i+1] >> b[i+1];
+            for(int i = st ; i < min(s.size(),st+t.size()) ; i++){
+                if(s[i] > t[i-st]){
+                    fl = 0;
+                }
+            }
+            if(fl)lef = mid;
+            else rig = mid;
+        }
+        cerr << p[lef]<< endl;
     }
-    vector<double> c = convolution(a,b);
 
-    for(int i = 0 ; i < 2*n ; i++){
-        cout << (long long )(c[i+1] + 0.5)<< endl; 
-    }
-
+    
+    
     return 0;
 }
