@@ -1,12 +1,208 @@
-#include<iostream>
-#include<vector>
-#include<string>
+//include
+//------------------------------------------
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cctype>
+#include <string>
+#include <cstring>
+#include <ctime>
+#include<queue>
+#include<complex>
 using namespace std;
+//conversion
+//------------------------------------------
+inline long long toint(string s) {long long v; istringstream sin(s);sin>>v;return v;}
+template<class T> inline string toString(T x) {ostringstream sout;sout<<x;return sout.str();}
+//math
+//-------------------------------------------
+template<class T> inline T sqr(T x) {return x*x;}
+//typedef
+//------------------------------------------
+typedef long long ll;
+typedef long long LL;
+typedef vector<int > vi;
+typedef vector<long long > VLL;
+typedef vector<long long > vll;
+typedef vector<string > ves;
+typedef vector<char > vech;
+
+typedef pair<long long , long long> pll;
+typedef pair<long long , long long> PLL;
+typedef map<ll , ll >mll;
+typedef map<int , int >mii;
+typedef map<char , int >mci;
+typedef map<char , ll >mcl;
+typedef vector<pair<ll , ll> > vpll;
+
+//container util
+//------------------------------------------
+#define ALL(a)  (a).begin(),(a).end()
+#define RALL(a) (a).rbegin(), (a).rend()
+#define VECMAX(x) *max_element(ALL(x))
+#define VECMIN(x) *min_element(ALL(x))
+#define PB push_back
+#define MP make_pair
+#define SZ(a) int((a).size())
+#define EACH(i,c) for(typeof((c).begin()) i=(c).begin(); i!=(c).end(); ++i)
+#define EXIST(s,e) ((s).find(e)!=(s).end())
+#define SORT(c) sort((c).begin(),(c).end())
+//repetition
+//------------------------------------------
+#define FOR(i,a,b) for(long long i=(a);i<(b);++i)
+#define REP(i,n)  FOR(i,0,n)
+//#define MULTIPLE(i,n,k) for(int i = (k) ; i<(n) ; i+=k+1)//倍数ループ
+//constant
+//------------------------------------------
+const double EPS = 1e-10;
+const double PI  = acos(-1.0);
+//clear memory
+#define CLR(a) memset((a), 0 ,sizeof(a))
+//debug
+#define dump(x)  cerr << #x << " = " << (x) << endl;
+#define debug(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ")" << " " << __FILE__ << endl;
+#define SIZEOF(x) sizeof(x)/sizeof(x[0])
+
+
+const long long INF = 4e18;
+const long long NINF = 1 - INF;
+
+#define ENDL cout << endl;
+#define CIN(a) REP(i,a.size())cin >> a[i];
+
+//二次元座標の点を表す構造体。xとyをメンバに持つ
+struct POINT{
+    double x;
+    double y;
+
+};
+
+
+
+ll gcd(ll x, ll y) { return y ? gcd(y, x % y) : x; }
+ll lcm(ll a, ll b) { return (a / gcd(a, b)) * b; }
+
+/*
+    nCr , 値が大きいとオーバーフローする
+    n<=kなら1 (0C1や1C5= 1)
+*/
+ll nCr(ll n,  ll r){
+  if ( r * 2 > n ) r = n - r;
+  ll dividend = 1;
+  ll divisor  = 1;
+  for ( unsigned int i = 1; i <= r; ++i ) {
+    dividend *= (n-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
+
+
+//firstが最大値（最小値） , second が index
+template<class T>
+pair<T , ll> maxP(vector<T> a , ll size){
+    pair <T , ll> p;
+    ll ind = 0;
+    T mx = NINF;
+    REP(i,size){
+        if(mx<a[i]){
+            mx = a[i];
+            ind = i;
+        }
+    }
+    p.first = mx;
+    p.second = ind;
+    return p;
+}
+
+
+template<class T>
+pair<T , ll> minP(vector<T> a , ll size){
+    pair <T , ll> p;
+    T mn = INF;
+    ll ind = 0;
+    REP(i,size){
+        if(mn > a[i]){
+            mn = a[i];
+            ind = i;
+        }
+    }
+    p.first = mn;
+    p.second = ind;
+    return p;
+}
+
+template<class T>
+T sumL(vector<T> a , ll size){
+    T sum = 0;
+    REP(i,size){
+        sum += a[i];
+
+    }
+    return sum;
+}
+
+
+ //sort済みのvll ; a のleft ~ rightにtがいくつあるか
+ll counT(VLL a ,ll left , ll right ,  ll t ){
+    //sort(a.begin(),a.end());
+    return upper_bound(a.begin() + left , a.begin() + right,t)-lower_bound(a.begin() + left , a.begin() + right, t);
+}
+
+//切り上げ
+ll kiriage(ll a , ll b){
+    return a/b + (a%b!=0);
+}
+
+#define COUNT(a,b) counT((a),0,a.size(),(b))
+
+#define MAX(x) maxP(x,x.size())
+#define MIN(x) minP(x,x.size())
+#define SUM(x) sumL(x,x.size())
 
 
 
 
+//-------要素を見つける-----------
+ll search(vll &a , ll n ){//a内のnのindexを返す
+    std::vector<ll>::iterator iter = std::find(a.begin(), a.end(), n);
+    size_t index = distance(a.begin(), iter);
+    return index;
+}
 
+
+//桁数
+int getdigit(ll n){
+    return log10(n)+1;
+}
+
+
+
+// toBinary[i]は,binaを二進数で表したときの下からi桁目のbitが入ってる
+vll toBinary(ll bina){
+    vll ans;
+    for (ll i = 0; bina>0 ; i++)
+    {
+        ans.push_back(bina%2);
+        bina = bina/2;
+    }
+    return ans;
+}
 
 
 
@@ -396,33 +592,16 @@ int upper_bound_SA(String_or_VectorInt &s , vector<int> &suffix_array , String_o
 
 
 
-
-
-int main(){ 
-
+int main(){
     string s;
     cin >> s;
-    vector<int> SA = SuffixArray(s);
-    int q ;
-    cin >> q;
-    while(q-->0){
-        string t;cin >> t;
-        if(upper_bound_SA(s,SA,t) - lower_bound_SA(s,SA,t)){
-            cout << 1 << endl;
-        }else{
-            cout << 0 << endl;
-        }
+    
+    auto v = SuffixArray(s);
+    v.erase(v.begin());
+    
+    for(int x : v)cout << x << " ";
+    ENDL;
 
-    }
-
-
-    return 0;
+    return 0;   
 }
-
-
-
-
-
-
-
 
