@@ -399,6 +399,9 @@ vector<int> SuffixArray(String_or_VectorInt s , int charnum_max = 1100000){
             LMS_index.push_back(i+1);
         }
     }
+    for(char c : type)cout << c << " ";
+    ENDL;
+
     for(int ind : LMS_index)isLMS[ind]=true;
 
     vector<int>(LMS_index.size()).swap(NewLMS_index);//並べ替えたLMSも、個数は同じ

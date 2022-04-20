@@ -114,20 +114,96 @@
 
                     <br>
                     <br>ここで、新たにvector&lt;int> bin(max_val) という配列を用意します。
-                    <br>bin[x] が表すのは、文字 x から始まる接尾辞がSuffix Arrayのどの位置に現れるのかです。
-                    <br>具体的にいうと、x から始まる接尾辞は、求めるSuffix Arrayにおいて、半開区間 : [ bin[x] , bin[x+1] ) に現れる。
+                    <br>bin[c] が表すのは、文字 c から始まる接尾辞がSuffix Array(SA)のどの位置に現れるのかです。
+                    <br>具体的にいうと、c から始まる接尾辞は、求めるSuffix Arrayにおいて、半開区間 : [ bin[c] , bin[c+1] ) に現れる。
                     <br>という定義のもと、binを作っていきます。
                     <br>
-                    <br>binの作り方は簡単で、s の中身を見て、文字 x が現れたら bin[x]++ をして、
-                    <br>sを全て見終わったらxが小さい順からbin[x+1] += bin[x]と、累積和のようにスライドさせていきます。
+                    <br>binの作り方は簡単で、s の中身を見て、文字 c が現れたら bin[c]++ をして、
+                    <br>sを全て見終わったらxが小さい順からbin[c+1] += bin[c]と、累積和のようにスライドさせていきます。
+        
+                    <br>また、文字 c から始まる接尾辞が現れる区間を、c の bin と呼ぶことにします。
+                    <br>
+                    <br>それではinduced_sortのステップを3つに分けて紹介します。
+                    <br>
+                    <br>SAに順に接尾辞のindexを入れていきます。SAは初めは-1で初期化されています。
                     <br>
                     <br>
+                    <br><h_big>ステップ１</h_big>
+                    <br>各LMSのindexを、LMSの先頭の文字の bin の<Orange>末尾</Orange>から入れていきます。
                     <br>
+                    <br>
+                    <h_big>ステップ２</h_big>
+                    <br>SA を<Orange>先頭</Orange>から調べていき、SA が埋まっている(-1でない)なら、その index を x とする。
+                    <br>元の列 s において、s[x-1]が L型なら、s[x-1]のbinの<Orange>先頭</Orange>から x-1 を入れていきます。
+                    <br>
+                    <br>
+                    <h_big>ステップ3</h_big>
+                    <br>SA を<Orange>末尾</Orange>から調べていき、SA が埋まっている(-1でない)なら、その index を x とする。
+                    <br>s[x-1] が S型なら、s[x-1] の bin の<Orange>末尾</Orange>から x-1 を入れていきます。
+                    <br>
+                    <br>
+                    <br>こうして並べた接尾辞は、少なくとも先頭の文字についてはソートされています。
+                    <br>また、ある LMS から、ひとつ前の LMS までに現れる接尾辞に関してはソートされています。これは、各ステップとL型S型の定義を睨んだらわかると思います。
+                    <br>
+                    <br>&ensp;&ensp;&ensp;&ensp; ステップ２では、LMS、または L型の接尾辞から その一つ手前の L型接尾辞 を並べています。　
+                    LMSの先頭の文字 &lt; 1つ手前の L型の先頭の文字なので、必ずこれらは異なる bin に現れます。x &lt; y について、 bin[x] &lt;= bin[y] なので、これらはソートされています。
+                    また、L型の接尾辞 t から 一つ手前の L型 t' を並べるとき、L型の定義より t &lt; t' であり、ステップ２ではbinの先頭から埋めるという状況なので、t と t'
+                    の先頭の文字が同じ場合でも必ず t' は t よりも後ろの位置にきます。
+                    <br>
+                    <br>&ensp;&ensp;&ensp;&ensp; ステップ３では、L型の接尾辞 t からその一つ手前の S型の接尾辞 t' を並べます。 S型の定義より、t' &lt; t なので、
+                    binの末尾から埋めていけば t' は t よりも前の位置にきます。
+                    <br>
+                    <br>このように、ある１つのLMS接尾辞から派生して並べられた接尾辞達は全てソートされています。
+                    <br>しかし、ステップ１で埋められた LMS接尾辞達についてはソートされていません。
                     <br>
                 </section>
                 <br>
                 <br>
-                <br><h_big>ちょっとすみません。時間がなくなったので続きはまた今度書きます。</h_big>
+                <br>
+                <br>わかりやすいように、
+                <br>s = "nokokaba"の場合のソートの動きを図で見せましょう。
+                <div class="Box">
+
+                    <br><center><input type="button" value="前のステップ" onclick="select_back()" id ="Select_Back" style = " font-size: 25px;" class = "nomal_button">
+                        &ensp;&ensp;&ensp;&ensp;&ensp;
+                        <input type="button" value="次のステップ" onclick="select_next()" id ="Select_Next" style =" font-size: 25px; " class = "nomal_button"></center>
+                    <img src="./induced_sort_explain/sort0.png"  class = "induced_sort_explain" id = "induced_sort_0" style = "display:block;">
+                    <img src="./induced_sort_explain/sort1.png"  class = "induced_sort_explain" id = "induced_sort_1" style = "display:none;">
+                    <img src="./induced_sort_explain/sort2.png"  class = "induced_sort_explain" id = "induced_sort_2" style = "display:none;">
+                    <img src="./induced_sort_explain/sort3.png"  class = "induced_sort_explain" id = "induced_sort_3" style = "display:none;">
+                    <img src="./induced_sort_explain/sort4.png"  class = "induced_sort_explain" id = "induced_sort_4" style = "display:none;">
+                    <img src="./induced_sort_explain/sort5.png"  class = "induced_sort_explain" id = "induced_sort_6" style = "display:none;">
+                    <img src="./induced_sort_explain/sort6.png"  class = "induced_sort_explain" id = "induced_sort_5" style = "display:none;">
+                    <img src="./induced_sort_explain/sort7.png"  class = "induced_sort_explain" id = "induced_sort_7" style = "display:none;">
+                    <img src="./induced_sort_explain/sort8.png"  class = "induced_sort_explain" id = "induced_sort_8" style = "display:none;">
+                    <img src="./induced_sort_explain/sort9.png"  class = "induced_sort_explain" id = "induced_sort_9" style = "display:none;">
+                    <img src="./induced_sort_explain/sort10.png" class = "induced_sort_explain" id = "induced_sort_10" style = "display:none;">
+                    <img src="./induced_sort_explain/sort11.png" class = "induced_sort_explain" id = "induced_sort_11" style = "display:none;">
+                    <br>
+                    <br><center><input type="button" value="前のステップ" onclick="select_back()" id ="Select_Back" style = " font-size: 25px;" class = "nomal_button">
+                        &ensp;&ensp;&ensp;&ensp;&ensp;
+                        <input type="button" value="次のステップ" onclick="select_next()" id ="Select_Next" style =" font-size: 25px; " class = "nomal_button"></center>
+                
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 <br>
                 <br>
                 <br><a href = "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D">こちらの問題</a>でverifyしました。以下はコード例です。
@@ -136,6 +212,11 @@
                 <br>
                 <br>
                 <br>
+                <br>
+
+
+
+
                 <code>
                     <ol style="list-style:decimal-leading-zero outside;padding-left:36px;margin:0;background-color:#EEF;width:90%;line-height:14px;color:#000;font-size:12px;">
                     <li style="background-color:#EFF;">#include&lt;iostream&gt;</li>
@@ -590,3 +671,47 @@
 
 
 </html>
+
+
+
+
+<script>
+    //ソートの解説
+
+    
+    var PageList = document.getElementsByClassName("induced_sort_explain");
+    var size = PageList.length;
+    var index_now = 0;
+
+    function display_page(index){
+        index = (index%size+size)%size;
+        PageList[index].style.display = "block";
+        return true;
+    }
+    
+
+    function close_page(index){
+        index = (index%size+size)%size;
+        PageList[index].style.display = "none";
+        return true;
+    }
+    
+
+    function select_next(){
+        if(index_now==size-1)return;
+        close_page(index_now);
+        index_now++;
+        index_now = (index_now%size+size)%size;
+        display_page(index_now);
+    }
+
+    
+    function select_back(){
+        if(index_now == 0)return;
+        close_page(index_now);
+        index_now--;
+        index_now = (index_now%size+size)%size;
+        display_page(index_now);
+    }
+
+</script>
