@@ -335,7 +335,7 @@
 
 
 
-                    <!--脳トレ======================================================-->
+                    <!--アプリ======================================================-->
                     <div id = "Application_article" style = "display: none ; ">
 
                         <h_big style = "color:blue;">雑なアプリ</h_big>
@@ -349,8 +349,12 @@
                         <br>
     
                         <h_middle>
-                            <a href =./Application/nou_training_QuickSentakuSort.html>クイック選択ソート</a>
-                        </h_middle>
+                            <a href =./Application/nou_training_QuickSentakuSort.html>クイック選択ソート</a></h_middle>
+                        <br>
+                            
+                        <h_middle>
+                            <a href =./Application/App1.html>雑なアプリ１</a></h_middle>
+                        <br>
 
 
                     </div>
@@ -610,6 +614,10 @@
 
 <script>
 
+
+
+
+
     function SetButtons(){
         //  ボタンの配置関連
 
@@ -624,6 +632,7 @@
 
         var WindowHeight = window.innerHeight;
         var WindowWidth = window.innerWidth;
+
         
 
         var r = WindowWidth/3.1;
@@ -639,17 +648,30 @@
         
         for(var index = 0 ; index < button_num;index++){
 
-            /*画面サイズに合わせてサイズを変える*/
-            ButtonList[index].style.width = ""+WindowWidth/4.2+"px";
-            ButtonList[index].style.height = ""+WindowWidth/4.2+"px";
 
 
 
 
+            var X , Y;
+            if(WindowHeight < WindowWidth){//画面が横長の時
+                var r_ = WindowWidth/4.5;
+                X = Math.cos(red*index-red*2)*r_*3/2+r*20/17;//なんかわからんけどこれがちょうどいい
+                Y = Math.sin(red*index-red*2)*r_*2/3+r_;//横が広いときは少し横長に
 
-            var X = Math.cos(red*index-red*2)*r+r;
-            var Y = Math.sin(red*index-red*2)*r+r;
+                /*画面サイズに合わせてサイズを変える*/
+                ButtonList[index].style.width = ""+WindowWidth/6.5+"px";
+                ButtonList[index].style.height = ""+WindowWidth/6.5+"px";
 
+            }else{//画面が縦長の時
+                var r_ = WindowWidth/3.2;
+                X = Math.cos(red*index-red*2)*r_+r;
+                Y = Math.sin(red*index-red*2)*r_+r;//横が広いときは少し横長に
+
+                /*画面サイズに合わせてサイズを変える*/
+                ButtonList[index].style.width = ""+WindowWidth/4.2+"px";
+                ButtonList[index].style.height = ""+WindowWidth/4.2+"px";
+
+            }
            
             ButtonList[index].style.left = ""+X+"px";
             ButtonList[index].style.top = ""+Y+"px";
