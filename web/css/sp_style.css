@@ -23,53 +23,40 @@ body {
 	background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 211, 219));
 	background: linear-gradient(to right, #7bacc2, rgb(222, 207, 221));
 
-	animation: BackGroundAnimation 20s 0s infinite alternate linear;
-}
-
-
-@keyframes BackGroundAnimation {
-	0%{
-		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 211, 219));
-		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 211, 219));
-		background: linear-gradient(to right, #7bacc2, rgb(222, 207, 221));
-	}
 	
-	20%{
-		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 201, 209));
-		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 201, 209));
-		background: linear-gradient(to right, #7bacc2, rgb(222, 207, 201));
-	}
-
-	40%{
-		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 191, 199));
-		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 191, 199));
-		background: linear-gradient(to right, #7bacc2, rgb(222, 191, 199));
-	}
-
-	60%{
-		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 181, 189));
-		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 189, 189));
-		background: linear-gradient(to right, #7bacc2, rgb(222, 187, 181));
-	}
-
-	80%{
-		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 171, 179));
-		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 171, 179));
-		background: linear-gradient(to right, #7bacc2, rgb(222, 177, 171));
-	}
-
-	100%{
-		background: -moz-linear-gradient(left, #7bacc2, rgb(222, 161, 169));
-		background: -webkit-linear-gradient(left, #7bacc2, rgb(222, 161, 169));
-		background: linear-gradient(to right, #7bacc2, rgb(222, 167, 161));
-	}
 }
 
 
 
+.BackGround_basic {
+	
+	margin: 0px;
+	padding: 0px;
+	
+    left:0%;
+    top:0%;
+    height:100%;
+    width:100%;
+    background-color: #ffffff;
+    z-index: -100;
+    
+    position:fixed;
 
+    /*
+        背景の画像はhtmlで指定
+    */
+    
+    
+    animation: bg_slide 32s linear infinite;
+}
 
-
+@keyframes bg_slide {
+    0% { background-position: 0% 50% ;}
+    25% { background-position: 50% 100%;}
+    50% { background-position: 100% 50%;}
+    75% { background-position: 50% 0%;}
+    100% { background-position: 0% 50%;}
+}
 
 
 
@@ -208,195 +195,3 @@ h_small{
 
 
 
-
-
-
-
-
-/*------------------------------------------------------------------------------------------*/
-/*----------------------------------{index.htmlで使う}---------------------------------------*/
-/*------------------------------------------------------------------------------------------*/
-
-
-
-/*トップやタイトル(index)用*/
-.Introduction_index{
-	background: rgb(114, 149, 177);	
-	color: rgb(215, 224, 226);
-	padding: 30px;		
-	border : 4px solid;
-	border-color: #a3a9ca;
-	text-align: center;
-	
-	
-}
-
-
-
-/*
-	ボタンを配置
-*/
-.ButtonBox_index{
-	position: relative;
-    margin: 0 auto;
-	width:100%;
-	height: auto;
-}
-
-
-/*
-	項目一覧...項目名は簡潔に
-*/
-.Index_index{
-	color: black;
-	width:25%;
-		
-}
-
-/*
-	項目の中身
-*/
-.article_index{
-	background: rgb(253, 253, 253);	
-
-	padding: 30px;		
-
-	opacity: 0.85;
-
-	border-radius: 20px;
-
-
-	width:85%;
-
-	position: relative;
-
-}
-
-
-/*
-	Indexの選択肢のボタン
-	animation付き
-	サイズはhtml(javascript)側で指定
-	ボタンの縁はjavascriptで変更する
-*/
-.button_index {
-	justify-content: center;
-	align-items: center;
-
-	background: rgb(219, 221, 224);
-	border: 2px solid rgb(102, 112, 168);
-	box-sizing: border-box;
-
-	width:200px;
-	height:200px;
-	border-radius: 100%;
-
-	
-	
-	color:  rgb(102, 112, 168);
-	font-size: 9px;
-	text-align: center;
-	text-decoration: firebrick;
-
-	position: absolute;
-
-
-	transition-duration: 0.2s;
-
-	
-
-}
-
-
-
-.button_index:hover {
-	background: rgb(104, 109, 160);
-	color: #fff;
-	animation: alternate;
-	border: 2px solid rgb(102, 112, 168);
-	color:  white;
-}
-
-
-
-
-/*
-	Aboutのボタン
-	サイズはjavascript内で調整
-*/
-.button_type2_index {
-	justify-content: center;
-	align-items: center;
-
-	/*
-		背景色とグラデーション
-	*/
-	background: -moz-linear-gradient(left, #e2e2bd, rgb(173, 173, 168));
-	background: -webkit-linear-gradient(left, #e2e2bd, rgb(173, 173, 168));
-	background: linear-gradient(to right, #e2e2bd, rgb(173, 173, 168));
-
-	border: 2px solid rgb(93, 108, 112);
-	
-	box-sizing: border-box;
-
-	width:200px;
-	height:200px;
-	border-radius: 10px;
-
-	
-	color:  rgb(73, 87, 165);
-	font-size: 7px;
-	text-align: center;
-	text-decoration: firebrick;
-
-	position: relative;
-
-
-	transition-duration: 0.2s;
-
-	
-
-}
-
-
-
-.button_type2_index:hover {
-	background: rgb(103, 104, 109);
-	color: #fff;
-	animation: alternate;
-}
-
-
-
-
-
-
-/*
-	記事を閉じるボタン
-*/
-
-.close_button_index{
-	justify-content: center;
-	align-items: center;
-
-	background: rgb(233, 235, 226);
-	border: 1px solid black;
-	box-sizing: border-box;
-
-	width:60px;
-	height:35px;
-	
-
-	color: rgb(243, 94, 67);
-	font-size: 14px;
-	text-align: center;
-	text-decoration: none;
-	position: relative;
-	transition-duration: 0.2s;
-}
-
-
-.close_button_index:hover{
-	background:rgb(118, 87, 230);
-	color: white;
-}

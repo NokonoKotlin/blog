@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="ja">
     <link rel="stylesheet" media="screen and (max-width:768px)" href="./css/sp_style.css">
+    <link rel="stylesheet" media="screen and (max-width:768px)" href="./css/sp_index.css">
     <link rel="stylesheet" media="screen and (min-width:769px)" href="./css/pc_style.css">
+    <link rel="stylesheet" media="screen and (min-width:769px)" href="./css/pc_index.css">
     <link rel="icon" href="./favicons/favicon.ico">
     <head>
     <meta charset="utf-8">
@@ -15,11 +17,13 @@
 
 
 
-    <body>
+    <body>  
+        
 
          <!--軽くコメント ...-->
         <div id="Inner" >
-
+            <!--背景-->
+            <div class = "BackGround_basic" id = "BackGroundTag" style = "background-image:url(./images/background_cyan1.png);"></div>
 
 
 
@@ -48,67 +52,57 @@
 
 
 
-            <br>
-
-
-
-
-
-
-
-
 
             <!--====================================================ボタンを配置======================================================-->
 
-            <!--要素を円形に並べる-->
+
             <section class = "ButtonBox_index" id = "Buttons">
                 <br>
 
-                <!--左側の項目一覧(横幅は30%ぐらい)-->
-                <div class = "Index_index">
+                <!--項目の一覧-->
+                <div class = "Index_List_index" id = "Index_list">
 
                     <!--cssは"button_index"で,nameと同じIDの記事と対応している ,このボタンのidはあまり使わない,nameが大事-->
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_left_index"  
                         value = "データ構造" name = "DataStructure_article" id = "DataStructure_button">
 
 
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_middle_index"  
                         value = "アルゴリズム基礎" name = "Algorithm_basic_article" id = "Algorithm_basic_button">
 
                     
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_right_index"  
                         value = "アルゴリズム典型" name = "Algorithm_nomal_article" id = "Algorithm_nomal_button">
 
                     
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_left_index"  
                         value = "アルゴリズム発展" name = "Algorithm_hard_article" id = "Algorithm_hard_button">
 
                     
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_middle_index"  
                         value = "雑な日記" name = "MyDiary_article" id = "MyDiary_button">
 
 
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_right_index"  
                         value = "雑なアプリ" name = "Application_article" id = "Application_button">
 
 
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_left_index"  
                         value = "技術ブログ" name = "IT_blog_article" id = "IT_blog_button">
 
 
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_middle_index"  
                         value = "成果物" name = "MyProject_article" id = "MyProject_button">
                     <!--cssは"button_index"で,nameと同じIDの記事と対応している ,このボタンのidはあまり使わない,nameが大事-->
 
-                    
-                    
-                </div>
-                
-                <div class="Index_index">
                     <!--Aboutのボタン-->
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_type2_index"  
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_right_index"  
                         value = "About" name = "AboutThisPage_article" id = "AboutThisPage_button">
+                    
                 </div>
+                <!--floatを消す-->
+                <div style = "clear:left;"></div>
+        
                 
 
 
@@ -157,6 +151,10 @@
 
                         <h_big style = "color:blue;">アルゴリズム基礎</h_big>
                         <br>
+                        <br>
+
+                        <h_middle>
+                            <a  href = ./itest.html>コードのテンプレ</a></h_middle>
                         <br>
 
                         <h_big>計算テクニック<br></h_big>
@@ -494,9 +492,6 @@
                         <br>&ensp;&ensp; -> SegmentMap
                         <br>&ensp;&ensp; -> Link-Cut Tree
                         <br>&ensp;&ensp; -> 平方分割
-                        <br>
-                        <br>
-                        <a href = "./itest.html">テンプレート</a></h_middle>
 
                     </div>
 
@@ -636,63 +631,15 @@
     function SetButtons(){
         //  ボタンの配置関連
 
-        //button_indexクラスの要素をlistにまとめる
-        var ButtonList = document.getElementsByClassName("button_index");
-        var button_num = ButtonList.length;
+        //項目一覧idの要素をlistにまとめる
+        var ButtonList = document.getElementById("Index_list");
+        var button_num = ButtonList.childElementCount;
         if(button_num <= 0)return false;
-        
 
-        var degree = 360.0/button_num;
-        var red = (degree*Math.PI/180.0);
 
-        var WindowHeight = window.innerHeight;
-        var WindowWidth = window.innerWidth;
-
-        
-
-        var r = WindowWidth/3.1;
-
-        /*
-            Aboutを表示させるボタンの配置(横幅、縦幅共にWindowWidthなのに注意)
-        */
-        document.getElementById('AboutThisPage_button').style.left = "0px";
-        document.getElementById('AboutThisPage_button').style.top = "0px";
-        document.getElementById('AboutThisPage_button').style.width = ""+WindowWidth/10+"px";
-        document.getElementById('AboutThisPage_button').style.height = ""+WindowWidth/10+"px";
-        
-        
         for(var index = 0 ; index < button_num;index++){
-
-
-
-
-
-            var X , Y;
-            if(WindowHeight < WindowWidth){//画面が横長の時
-                var r_ = WindowWidth/4.5;
-                X = Math.cos(red*index-red*2)*r_*3/2+r*20/17;//なんかわからんけどこれがちょうどいい
-                Y = Math.sin(red*index-red*2)*r_*2/3+r_;//横が広いときは少し横長に
-
-                /*画面サイズに合わせてサイズを変える*/
-                ButtonList[index].style.width = ""+WindowWidth/6.5+"px";
-                ButtonList[index].style.height = ""+WindowWidth/6.5+"px";
-
-            }else{//画面が縦長の時
-                var r_ = WindowWidth/3.2;
-                X = Math.cos(red*index-red*2)*r_+r;
-                Y = Math.sin(red*index-red*2)*r_+r;//横が広いときは少し横長に
-
-                /*画面サイズに合わせてサイズを変える*/
-                ButtonList[index].style.width = ""+WindowWidth/4.2+"px";
-                ButtonList[index].style.height = ""+WindowWidth/4.2+"px";
-
-            }
-           
-            ButtonList[index].style.left = ""+X+"px";
-            ButtonList[index].style.top = ""+Y+"px";
-            
-
-        
+            client_w = ButtonList.children[index].clientWidth;
+            ButtonList.children[index].style.height = ""+client_w + "px";
         }
 
         return true;
@@ -731,8 +678,8 @@
             var interval_id = null;
 
             
-            var ButtonList = document.getElementsByClassName("button_index");
-            var button_num = ButtonList.length;
+            var ButtonList = document.getElementById("Index_list");
+            var button_num = ButtonList.childElementCount;
 
 
             interval_id = setInterval(() => {
@@ -741,11 +688,11 @@
                     var rand = Math.floor(Math.random()*2);
                     
                     if(rand == 1){
-                        ButtonList[index].style.border = "2px solid rgb(226, 168, 226)";
-                        ButtonList[index].style.color = "rgb(228, 81, 208)";
+                        ButtonList.children[index].style.border = "2px solid rgb(226, 168, 226)";
+                        ButtonList.children[index].style.color = "rgb(228, 81, 208)";
                     }else{
-                        ButtonList[index].style.border = "2px solid rgb(102, 112, 168)";
-                        ButtonList[index].style.color = "rgb(102, 112, 168)";
+                        ButtonList.children[index].style.border = "2px solid rgb(102, 112, 168)";
+                        ButtonList.children[index].style.color = "rgb(102, 112, 168)";
                     }
                 }
 
