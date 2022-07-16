@@ -33,11 +33,12 @@
 .button_index {
 	justify-content: center;
 	align-items: center;
-	background: rgb(219, 221, 224);
-	border: 2px solid rgb(102, 112, 168);
+	background: rgba(221, 228, 238, 0.6);
+	border: 2px solid rgb(124, 136, 206);
 	box-sizing: border-box;
 	width:100%;
 	color:  rgb(102, 112, 168);
+	
 	font-size: 14px;
 	text-align: center;
 	text-decoration: firebrick;
