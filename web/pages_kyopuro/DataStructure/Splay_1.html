@@ -83,13 +83,8 @@
                 
                 <br>
                 <br>
-
                 <code>
-                    <ol style="list-style:decimal-leading-zero outside;padding-left:36px;margin:0;background-color:#EEF;width:90%;line-height: 14px; color:#000;font-size:12px;">
-                    <li style="background-color:#EFF;"></li>
-                    <li style="background-color:#EEF;"></li>
-                    <li style="background-color:#EFF;"></li>
-                    <li style="background-color:#EEF;"></li>
+                    <ol style="list-style:decimal-leading-zero outside;in-left:0;padding-left:36px;margin:0;background-color:#EEF;width:90%;line-height: 14px; color:#000;font-size:12px;">
                     <li style="background-color:#EFF;"></li>
                     <li style="background-color:#EEF;"></li>
                     <li style="background-color:#EFF;"></li>
@@ -830,7 +825,7 @@
                     <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;void shift_right(int l , int r){</li>
                     <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l = max(0,l);</li>
                     <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r = min(Size,r);</li>
-                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(l&gt;=r)return;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(l+1&gt;=r)return;</li>
                     <li style="background-color:#EEF;"></li>
                     <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root = shift_right_sub(l,r,Root);</li>
                     <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root-&gt;update();</li>
@@ -848,7 +843,7 @@
                     <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;void shift_left(int l , int r){</li>
                     <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l = max(0,l);</li>
                     <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r = min(Size,r);</li>
-                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(l&gt;=r)return;</li>
+                    <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(l+1&gt;=r)return;</li>
                     <li style="background-color:#EEF;"></li>
                     <li style="background-color:#EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root = shift_left_sub(l,r,Root);</li>
                     <li style="background-color:#EEF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root-&gt;update();</li>
@@ -955,8 +950,8 @@
                     <li style="background-color:#EFF;"></li>
                     <li style="background-color:#EEF;"></li>
                     <li style="background-color:#EFF;"></li>
+                    <li style="background-color:#EEF;"></li>
                     </ol></code>
-
 
 
             </section>
