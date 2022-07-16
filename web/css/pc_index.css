@@ -19,24 +19,7 @@
 
 
 
-/*
-	ボタンを配置
-*/
-.ButtonBox_index{
-	position: relative;
-    margin: 0 auto;
-	width:100%;
-	height: auto;
-}
 
-
-/*
-	項目一覧...項目名は簡潔に
-*/
-.Index_List_index{
-	color: black;
-	max-width: 800px;
-}
 
 
 
@@ -47,15 +30,15 @@
 	ボタンの縁はjavascriptで変更する
 	heightはjavascriptで指定
 */
-.button_left_index {
+.button_index {
 	justify-content: center;
 	align-items: center;
-	background: rgb(219, 221, 224);
-	border: 2px solid rgb(102, 112, 168);
+	background: rgba(221, 228, 238, 0.6);
+	border: 2px solid rgb(124, 136, 206);
 	box-sizing: border-box;
-	float:left;
-	width:33%;
+	width:100%;
 	color:  rgb(102, 112, 168);
+	
 	font-size: 14px;
 	text-align: center;
 	text-decoration: firebrick;
@@ -64,76 +47,10 @@
 
 }
 
-.button_left_index:hover {
+.button_index:hover {
 
 	background-color: rgba(234, 235, 171, 0.692);
 }
-
-/*
-	Indexの選択肢のボタン(中央)
-	animation付き
-	ボタンの縁はjavascriptで変更する
-	heightはjavascriptで指定
-*/
-.button_middle_index {
-	justify-content: center;
-	align-items: center;
-	background: rgb(219, 221, 224);
-	border: 2px solid rgb(102, 112, 168);
-	box-sizing: border-box;
-	float:left;
-	width:33%;
-	color:  rgb(102, 112, 168);
-	font-size: 14px;
-	text-align: center;
-	text-decoration: firebrick;
-	position: relative;
-	transition-duration: 0.2s;
-
-}
-
-.button_middle_index:hover {
-
-	background-color: rgba(234, 235, 171, 0.692);
-}
-
-.square:before {
-	content: “”;
-	display: block;
-	padding-top: 100%;
-}
-
-
-/*
-	Indexの選択肢のボタン(右側)
-	animation付き
-	ボタンの縁はjavascriptで変更する
-	heightはjavascriptで指定
-*/
-.button_right_index {
-	justify-content: center;
-	align-items: center;
-	background: rgb(219, 221, 224);
-	border: 2px solid rgb(102, 112, 168);
-	box-sizing: border-box;
-	float:left;
-	width:33%;
-	color:  rgb(102, 112, 168);
-	font-size: 14px;
-	text-align: center;
-	text-decoration: firebrick;
-	position: relative;
-	transition-duration: 0.2s;
-
-}
-
-.button_right_index:hover {
-
-	background-color: rgba(234, 235, 171, 0.692);
-}
-
-
-
 
 /*
 	記事を閉じるボタン
@@ -165,24 +82,26 @@
 	color: white;
 }
 
-/*
-	項目の中身
-*/
 .article_index{
+
 	background: rgb(253, 253, 253);	
 
 	padding: 30px;		
 
 	opacity: 0.85;
 
-	border-radius: 20px;
+	box-sizing: border-box;
 
-	top:20%;
-	left:10%;
-	right:10%;
+	width:100%;
+	
+	
 	z-index:3;
+	position:relative;
+}
 
 
-	position: fixed;
+.Contents{
+	width:100%;
+	background-color: rgba(0,0,0,0);
 
 }

@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>色不変日記</title>
+    <title>ノコ日記</title>
         
 
     </head>
@@ -32,18 +32,13 @@
             <section class = "Introduction_index">
                 
                 <h_big>   
-                    色不変日記<br></h_big>
+                    ノコ日記<br></h_big>
 
                 <h_middle>
-                    色が変わらない人の学習日記<br></h_middle>
+                    頑張って色を変えたい人の学習日記<br></h_middle>
                 
 
             
-                <section style="text-align:right;">
-                    お問い合わせはこちら->
-                    <a href ="https://twitter.com/NokonoKotlin?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" >Twitter</a> 
-                     , <a href ="https://atcoder.jp/users/NokonoKotlin">AtCoder</a>
-                </section>
 
 
 
@@ -51,59 +46,6 @@
 
 
 
-
-
-            <!--====================================================ボタンを配置======================================================-->
-
-
-            <section class = "ButtonBox_index" id = "Buttons">
-                <br>
-
-                <!--項目の一覧-->
-                <div class = "Index_List_index" id = "Index_list">
-
-                    <!--cssは"button_index"で,nameと同じIDの記事と対応している ,このボタンのidはあまり使わない,nameが大事-->
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_left_index"  
-                        value = "データ構造" name = "DataStructure_article" id = "DataStructure_button">
-
-
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_middle_index"  
-                        value = "アルゴリズム基礎" name = "Algorithm_basic_article" id = "Algorithm_basic_button">
-
-                    
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_right_index"  
-                        value = "アルゴリズム典型" name = "Algorithm_nomal_article" id = "Algorithm_nomal_button">
-
-                    
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_left_index"  
-                        value = "アルゴリズム発展" name = "Algorithm_hard_article" id = "Algorithm_hard_button">
-
-                    
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_middle_index"  
-                        value = "雑な日記" name = "MyDiary_article" id = "MyDiary_button">
-
-
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_right_index"  
-                        value = "雑なアプリ" name = "Application_article" id = "Application_button">
-
-
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_left_index"  
-                        value = "技術ブログ" name = "IT_blog_article" id = "IT_blog_button">
-
-
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_middle_index"  
-                        value = "成果物" name = "MyProject_article" id = "MyProject_button">
-                    <!--cssは"button_index"で,nameと同じIDの記事と対応している ,このボタンのidはあまり使わない,nameが大事-->
-
-                    <!--Aboutのボタン-->
-                    <input type ="button" onclick = "OpenPage(event)" class = "button_right_index"  
-                        value = "About" name = "AboutThisPage_article" id = "AboutThisPage_button">
-                    
-                </div>
-                <!--floatを消す-->
-                <div style = "clear:left;"></div>
-        
-                
 
 
 
@@ -121,33 +63,20 @@
 
 
 
-
-                <!--最初は隠しておく-->
-                <div class = "article_index" id = "Contents"  style="display:none;"> 
                     
-
-
-                    <!--閉じるボタン-->
-                    <input type = "button" value = "Close" onclick="ClosePage()" class ="close_button_index" id = "close_button">
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    
+            <div class = "Contents">
 
 
 
 
                     <!--アルゴ基礎======================================================-->
-                    <div id = "Algorithm_basic_article" style = "display: none ; ">
+
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "アルゴリズム基礎" name = "Algorithm_basic_article" id = "Algorithm_basic_button">
+
+
+                    <div id = "Algorithm_basic_article" class = "article_index" style = "display: none ; ">
 
                         <h_big style = "color:blue;">アルゴリズム基礎</h_big>
                         <br>
@@ -215,6 +144,8 @@
                         <h_middle>
                             <a  href = ./pages_kyopuro/kiso/Problem_2.html>近視、遠視</a></h_middle>
                         <br>
+
+                        <input type = "button" value = "Close" name = "Algorithm_basic_article"  onclick="ClosePage(event)" class ="close_button_index" id = "close_button" >
                         
                     </div>
 
@@ -228,11 +159,13 @@
 
 
 
-
-
                     
                     <!--アルゴ典型======================================================-->
-                    <div id = "Algorithm_nomal_article" style = "display: none ; ">
+                                                            
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "アルゴリズム典型" name = "Algorithm_nomal_article" id = "Algorithm_nomal_button">
+
+                    <div id = "Algorithm_nomal_article" class = "article_index"  style = "display: none ; ">
 
                         <h_big style = "color:blue;">アルゴリズム典型</h_big>
                         <br>
@@ -252,6 +185,8 @@
                             <a  href = ./pages_kyopuro/tenkei/MaxFlow_1.html>最大流(easy)</a></h_middle>
                         <br>
 
+                        <input type = "button" value = "Close" name = "Algorithm_nomal_article"  onclick="ClosePage(event)" class ="close_button_index" id = "close_button" >
+
                     </div>
 
 
@@ -270,7 +205,11 @@
 
                     
                     <!--アルゴ発展======================================================-->
-                    <div id = "Algorithm_hard_article" style = "display: none ; ">
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    value = "アルゴリズム発展" name = "Algorithm_hard_article" id = "Algorithm_hard_button">
+
+                
+                    <div id = "Algorithm_hard_article"  class = "article_index" style = "display: none ; ">
 
                         <h_big style = "color:blue;">むずい...</h_big>
                         <br>
@@ -282,6 +221,7 @@
                             <a href = "./pages_kyopuro/Hard/SA_IS.html">Suffix Array</a></h_middle>
                         <br>
 
+                        <input type = "button" value = "Close" name = "Algorithm_hard_article"  onclick="ClosePage(event)" class ="close_button_index" id = "close_button" >
 
                     </div>
 
@@ -298,9 +238,13 @@
 
 
                     
+                    <!--cssは"button_index"で,nameと同じIDの記事と対応している ,このボタンのidはあまり使わない,nameが大事-->
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "データ構造" name = "DataStructure_article" id = "DataStructure_button">
+
 
                     <!--データ構造======================================================-->
-                    <div id = "DataStructure_article" style = "display: none ; ">
+                    <div id = "DataStructure_article"  class = "article_index" style = "display: none ; ">
 
                         <h_big style = "color:blue;">データ構造</h_big>
 
@@ -336,6 +280,7 @@
                         <h_middle>
                             <a  href = ./pages_kyopuro/DataStructure/Problem_1.html>練習問題1</a></h_middle>
                         <br>
+                        <input type = "button" value = "Close" name = "DataStructure_article"  onclick="ClosePage(event)" class ="close_button_index" id = "close_button" >
 
                     </div>
 
@@ -353,13 +298,18 @@
 
 
                     <!--アプリ======================================================-->
-                    <div id = "Application_article" style = "display: none ; ">
+
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "雑なアプリ" name = "Application_article" id = "Application_button">
+
+
+                    <div id = "Application_article"  class = "article_index" style = "display: none ; ">
 
                         <h_big style = "color:blue;">雑なアプリ</h_big>
 
                         <br><br>
 
-
+                        <input type = "button" value = "Close" name = "Application_article"  onclick="ClosePage(event)" class ="close_button_index" id = "close_button" >
 
 
                     </div>
@@ -377,7 +327,13 @@
 
 
                     <!--雑な日記======================================================-->
-                    <div id = "MyDiary_article" style = "display: none ; ">
+
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                        value = "雑な日記" name = "MyDiary_article" id = "MyDiary_button">
+
+
+
+                    <div id = "MyDiary_article" class = "article_index"  style = "display: none ; ">
 
                         <h_big style = "color:blue;">日記を雑に書いていきます</h_big>
                         <br>
@@ -404,7 +360,8 @@
                         <h_middle>
                             <a href= "./myDiary/day6.html" >Day6 ~ AtCoder青になりました</a></h_middle>
                         <br>
-
+                        
+                        <input type = "button" value = "Close" name = "MyDiary_article"  onclick="ClosePage(event)" class ="close_button_index" id = "close_button" >
 
                     </div>
 
@@ -421,7 +378,10 @@
 
 
                     <!--技術ブログ======================================================-->
-                    <div id = "IT_blog_article" style = "display: none ; ">
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    value = "技術ブログ" name = "IT_blog_article" id = "IT_blog_button">
+
+                    <div id = "IT_blog_article"  class = "article_index" style = "display: none ; ">
 
                         <h_big style = "color:blue;">私のお勉強記録</h_big>
                         <br>
@@ -429,6 +389,7 @@
                         <h_middle>
                             <a href =./study/javascript_HTML/animation_1.html>アニメーション１</a></h_middle>
                         <br>
+                        <input type = "button" value = "Close" name = "IT_blog_article"  onclick="ClosePage(event)" class ="close_button_index" id = "close_button" >
 
                     </div>
 
@@ -444,7 +405,11 @@
 
 
                     <!--成果物======================================================-->
-                    <div id = "MyProject_article" style = "display: none ; ">
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    value = "成果物" name = "MyProject_article" id = "MyProject_button">
+                <!--cssは"button_index"で,nameと同じIDの記事と対応している ,このボタンのidはあまり使わない,nameが大事-->
+
+                    <div id = "MyProject_article" class = "article_index" style = "display: none ; ">
 
                         <h_big style = "color:blue;">作ってみた</h_big>
                         <br>
@@ -453,6 +418,7 @@
                         <h_middle>
                             <a href = "./myProject/VampireSurvivors.html">Vampire Survivors</a></h_middle>
                         <br>
+                        <input type = "button" value = "Close" name = "MyProject_article"  onclick="ClosePage(event)" class ="close_button_index" id = "close_button" >
 
                     </div>
 
@@ -471,7 +437,13 @@
 
 
                     <!--About======================================================-->
-                    <div id = "AboutThisPage_article" style = "display: none ; ">
+                    <!--Aboutのボタン-->
+                    <input type ="button" onclick = "OpenPage(event)" class = "button_index"  
+                    value = "About" name = "AboutThisPage_article" id = "AboutThisPage_button">
+
+
+                
+                    <div id = "AboutThisPage_article" class = "article_index" style = "display: none ; ">
 
                         <h_big style = "color:blue;">About</h_big>
                         <br>
@@ -480,7 +452,6 @@
                         <br>管理者(NokonoKotlin)はプヨグヤイングの初心者でありますので、辺なところとかがあっても許してください、精進します。
                         <br>
                         <br>サイトのUIや見た目に関するテクニックがないので、しばらくは見た目がよく変化すると思います。
-                        <br>ちなみに背景色が水色とピンクなのは、ボイスロイドの琴葉姉妹をモチーフにしているからです。
                         <br>
                         <br>競プロやプログヤイングをやめてしまったとき、このページを見てそういえばそんなこともあったなと振り返れるように頑張って更新していきます。
                         <br>
@@ -493,25 +464,8 @@
                         <br>&ensp;&ensp; -> Link-Cut Tree
                         <br>&ensp;&ensp; -> 平方分割
 
-                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!--title======================================================-->
-                    <div id = "" style = "display: none ; ">
-
-                        <h_big style = "color:blue;">title</h_big>
+                        <br>
+                        <input type = "button" value = "Close" name = "AboutThisPage_article"  onclick="ClosePage(event)" class ="close_button_index" id = "close_button" >
 
                     </div>
 
@@ -521,21 +475,38 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
+                
                 </div>
+
+
+                <section style="text-align:right;">
+                    お問い合わせはこちら->
+                    <a href ="https://twitter.com/NokonoKotlin?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" >Twitter</a> 
+                     , <a href ="https://atcoder.jp/users/NokonoKotlin">AtCoder</a>
+                </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
                 
 
 
-            </section>
+            
            
 
         </div>
@@ -559,21 +530,6 @@
 
 
 <script>//記事の表示関連
-    /*
-        変数や引数にHTML内で宣言されていないnameやidを入れないように注意
-    */
-
-    //  ボタンが何も選ばれていない場合のNowSelectedButtonの値
-    var NullString = String("");
-
-    /*  今選択されているボタンの名前 ... 初めは何も選択されてないので何も表示しない*/
-    var NowSelectedButtonName = NullString;
-
-
-    //  何かしらのボタンが選ばれてたら記事を表示
-    if(NowSelectedButtonName != NullString){
-        document.getElementById(NowSelectedButtonName).style.display = "block";
-    }
 
 
     /*引数のeはeventで、ボタンのクリックから受け取る。*/
@@ -582,22 +538,15 @@
 
         /*  ボタンのnameが記事のidと対応してるので、そのidの記事を閉じたり開いたりする*/
 
-        /*  (存在すれば)今まで選ばれてたボタンに対応している記事を閉じる*/
-        if(NowSelectedButtonName != NullString)ClosePage(NowSelectedButtonName);
-
-
-        /*  新しく選択されたボタンに更新*/
-        NowSelectedButtonName = e.target.name;
-
-        //console.log(NowSelectedButtonName)
-
         /*
-            新しい記事を開く
-            必ず順番は(閉じる -> 開く)の順番
+            押されるたびに、ボタンにbindする関数を変える
         */
-        document.getElementById("Contents").style.display = "block";
 
-        document.getElementById(NowSelectedButtonName).style.display = "block";
+        if(document.getElementById(e.target.name).style.display != "block"){
+            document.getElementById(e.target.name).style.display = "block";
+        }else{
+            document.getElementById(e.target.name).style.display = "none";
+        }
         
         return true;
     }
@@ -607,12 +556,9 @@
         引数のidは閉じるページのid
         idに何も入れなければ今見ている記事を閉じる
     */
-    function ClosePage(id = NowSelectedButtonName){
-        if(id == NullString)return false;
+    function ClosePage(e){
         
-        document.getElementById("Contents").style.display = "none";
-        document.getElementById(id).style.display = "none";
-        NowSelectedButtonName = NullString;
+        document.getElementById(e.target.name).style.display = "none";
         return true;
     }
 
